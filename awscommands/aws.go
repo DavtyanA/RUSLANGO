@@ -34,7 +34,7 @@ func downloadFromS3Bucket(item string) string {
 	//for some reason when you create a file with full item name/path it gives you an error
 	ss := strings.Split(item, "/")
 	fileName := ss[len(ss)-1] //to get just the file name without folders
-	file, err := os.Create("./tmp/" + fileName)
+	file, err := os.Create("tmp/" + fileName)
 	if err != nil {
 		fmt.Println("error creating a file", fileName, err)
 	}
