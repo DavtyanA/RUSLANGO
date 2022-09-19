@@ -98,7 +98,7 @@ func OnMessage(s *discordgo.Session, m *discordgo.MessageCreate) {
 		} else {
 			response = commands.Roll(100)
 		}
-		s.ChannelMessageSend(channel, "НОВЫЙ БОТ НАРОЛЛЯЛ "+response)
+		s.ChannelMessageSend(channel, response)
 	case commands.StringContains(m.Content, "посмотрим"), commands.StringContains(m.Content, "will see"), commands.StringContains(m.Content, "will see"):
 		awscommands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"WillSee.jpg")
 	case commands.StringContainsArray(m.Content, []string{"кастом", "ресел", "кемп", "дроп", "км", "сток", "сникеры", "хайпбист", "оффер", "сайз", "кондей", "ритейл", "легит чек",
