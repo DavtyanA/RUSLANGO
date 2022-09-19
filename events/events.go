@@ -89,7 +89,7 @@ func OnMessage(s *discordgo.Session, m *discordgo.MessageCreate) {
 		commands.StringContains(m.Content, "пошел ты нахер козёл"),
 		commands.StringContains(m.Content, "пошел ты нахер козел"):
 		s.ChannelMessageSend(channel, "https://youtu.be/qks8SgT1B4M")
-	case commands.StringStartsWith(m.Content, "roll"), commands.StringStartsWith(m.Content, "ролляй"), commands.StringStartsWith(m.Content, "роляй"):
+	case commands.StringStartsWith(m.Content, "roll"), commands.StringStartsWith(m.Content, "ролляй"), commands.StringStartsWith(m.Content, "роляй"), commands.StringStartsWith(m.Content, "ролл"):
 		message := strings.Split(m.Content, " ")
 		var response string
 		if len(message) > 1 {
