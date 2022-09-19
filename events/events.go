@@ -3,6 +3,7 @@ package events
 import (
 	"RUSLANGO/awscommands"
 	"RUSLANGO/commands"
+	"fmt"
 	"strconv"
 	"strings"
 	"time"
@@ -152,6 +153,7 @@ func OnMessage(s *discordgo.Session, m *discordgo.MessageCreate) {
 	case "справедливо":
 		awscommands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"orehus-sticker.png")
 		chann, _ := s.Channel(channel) //idk what anme to give
+		fmt.Println(chann.LastMessageID)
 		s.MessageReactionAdd(channel, chann.LastMessageID, "1021235066023723008")
 	case "кто", "кто?":
 		s.ChannelMessageSend(channel, "Дарцаев Исмаил Умарпашаевич 11 микрорайон космонавтов 54 приезжайте я чеченец таких пидорасов я буду разъебывать, и вас я буду разъебывать")
