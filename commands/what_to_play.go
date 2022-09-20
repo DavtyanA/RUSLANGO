@@ -5,31 +5,31 @@ func WhatToPlay(authorID string) string {
 	name := "сука"
 	//maybe make IDS enums, but not sure how to handle multiple IDs bois (Руслан и Козлов идите нахуй)
 	switch authorID {
-	case "329339194029899776":
+	case Enderlord_ID:
 		return "Хеллоу ебать ты кто"
-	case "333343403163123712":
+	case Giogis_ID:
 		name = "Олег"
-	case "395293715742064641":
+	case Mozart_ID:
 		name = "Даня"
 	case "434375071591563264", "911692496227139675", "796899505181032509", "395544758832988160", "313007272127102986":
 		name = "Никита"
-	case "328835966783717386":
+	case AYS_ID:
 		name = "Айс"
-	case "395319132863856650":
+	case Makich_ID:
 		return "DOTA 2"
-	case "310408199658405901":
+	case mk7k_ID:
 		name = "Михей"
-	case "431920924946858004":
+	case Vnatureloh_ID:
 		name = "Сандро"
-	case "413729427227410442":
+	case David_ID:
 		name = "Давид"
-	case "378566714310262785":
+	case Zeeklik_ID:
 		name = "Эрик"
-	case "516013742560116741":
+	case Squirtana_ID:
 		name = "Дима"
-	case "359012016876421131":
+	case Neaus_ID:
 		name = "Карпов"
-	case "333341352404320267":
+	case Ruslan_ID:
 		name = "Руслан"
 		responses = append(responses, "Ты чё, долбоёб, сам с собой разговариваешь?")
 	case "403451995601764352", "395256828075704322", "554784820924907570":

@@ -228,6 +228,10 @@ func OnMessage(s *discordgo.Session, m *discordgo.MessageCreate) {
 		s.ChannelMessageSend(channel, commands.Madina_Text)
 	case "сам нюхни":
 		awscommands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"smell-bebra.gif")
+	case "lf", "da", "да", "ну да":
+		awscommands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"pizda.gif")
+	case "серьезно?":
+		awscommands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"pizdabol.gif")
 	}
 }
 
