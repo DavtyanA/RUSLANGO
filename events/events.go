@@ -74,64 +74,6 @@ func OnMessage(s *discordgo.Session, m *discordgo.MessageCreate) {
 	var responses []string
 	// SMELL THE BEBRA!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!11
 
-	switch {
-	case commands.StringContainsArray(m.Content, []string{"бебр", "bebr"}):
-		commands.SendRandomFileFromFolder(s, channel, "bebra")
-	case commands.StringContainsArray(m.Content, []string{"бан", "ban"}):
-		commands.SendRandomFileFromFolder(s, channel, "ban")
-	case commands.StringContainsArray(m.Content, []string{"пиздец", "бля...", "жаль", "грустно", "хуево", "хуёво", "мде", "press f"}), strings.ToLower(m.Content) == "f":
-		commands.SendRandomFileFromFolder(s, channel, "F")
-	case commands.StringContainsArray(m.Content, []string{"фото член дрочить", "дрочить", "порно"}):
-		commands.SendRandomFileFromFolder(s, channel, "cock")
-	case commands.StringContainsArray(m.Content, []string{"loss", "потеря"}):
-		commands.SendRandomFileFromFolder(s, channel, "loss")
-	case commands.StringContainsArray(m.Content, []string{"amogus", "амогус", "амонг", "amog", "а мог", "сус", "sus", "among us"}):
-		commands.SendRandomFileFromFolder(s, channel, "amogus")
-	case commands.StringContains(m.Content, "козлов"), commands.StringContains(m.Content, "кызлар"):
-		commands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"kozlov1.jpg")
-		time.Sleep(1 * time.Second)
-		commands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"kozlov2.jpg")
-	case commands.StringContains(m.Content, "русские вперед"), commands.StringContains(m.Content, "русские вперёд"):
-		commands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"russiansgo.jpg")
-	case commands.StringContainsArray(m.Content, []string{"пошел нахер", "пошёл нахер", "пошёл ты нахер козёл", "пошёл ты нахер козел", "пошел ты нахер козёл", "пошел ты нахер козел"}):
-		s.ChannelMessageSend(channel, "https://youtu.be/qks8SgT1B4M")
-	case commands.StringStartsWith(m.Content, "roll"), commands.StringStartsWith(m.Content, "ролляй"), commands.StringStartsWith(m.Content, "роляй"), commands.StringStartsWith(m.Content, "ролл"):
-		message := strings.Split(m.Content, " ")
-		var response string
-		if len(message) > 1 {
-			num, _ := strconv.Atoi(message[1])
-			response = commands.Roll(num)
-		} else {
-			response = commands.Roll(100)
-		}
-		s.ChannelMessageSend(channel, response)
-	case commands.StringContains(m.Content, "посмотрим"), commands.StringContains(m.Content, "will see"), commands.StringContains(m.Content, "will see"):
-		commands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"WillSee.jpg")
-	case commands.StringContainsArray(m.Content, []string{"кастом", "ресел", "кемп", "дроп", "км", "сток", "сникеры", "хайпбист", "оффер", "сайз", "кондей", "ритейл", "легит чек",
-		"броук", "лейм", "шакал", "кук группа", "лоуболлер"}):
-		commands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"custom.jpg")
-	case commands.StringContains(m.Content, "ты кто"), commands.StringContains(m.Content, "кто это"), commands.StringContains(m.Content, "это кто"):
-		s.ChannelMessageSend(channel, "Я Дарцаев Исмаил Умарпашаевич 11 микрорайон космонавтов 54 приезжайте я чеченец таких пидорасов я буду разъебывать, и вас я буду разъебывать")
-		commands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"ismail.jpg")
-	case commands.StringContains(m.Content, "сука"), commands.StringContains(m.Content, "cerf"):
-		if m.Author.ID == "333341352404320267" {
-			s.ChannelMessageSend(channel, "Ну тут сыглы")
-		} else {
-			s.ChannelMessageSend(channel, "Сам сука")
-		}
-	case commands.StringContains(m.Content, "что делать"),
-		commands.StringContains(m.Content, "че делать"),
-		commands.StringContains(m.Content, "че сделать"),
-		commands.StringContains(m.Content, "что сделать"):
-		commands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"choosepudge.jpg")
-	case commands.StringContains(m.Content, "мем"), commands.StringContains(m.Content, "meme"):
-		commands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"meme.jpg")
-	case commands.StringStartsWith(m.Content, "удали"):
-		commands.Delete(s, channel, m)
-	case commands.StringContains(m.Content, "вадим"), m.Author.ID == "395304841812901888":
-		s.ChannelMessageSend(channel, "А вы в курсе что Вадим натурал?")
-	}
-
 	//MESSAGE IS EQUAL
 	switch strings.ToLower(m.Content) {
 	case "руслан":
@@ -237,6 +179,66 @@ func OnMessage(s *discordgo.Session, m *discordgo.MessageCreate) {
 		} else {
 			commands.MegaStory(s, channel)
 		}
+	}
+
+	switch {
+	case commands.StringContainsArray(m.Content, []string{"бебр", "bebr"}):
+		commands.SendRandomFileFromFolder(s, channel, "bebra")
+	case commands.StringContainsArray(m.Content, []string{"бан", "ban"}):
+		commands.SendRandomFileFromFolder(s, channel, "ban")
+	case commands.StringContainsArray(m.Content, []string{"пиздец", "бля...", "жаль", "грустно", "хуево", "хуёво", "мде", "press f"}), strings.ToLower(m.Content) == "f":
+		commands.SendRandomFileFromFolder(s, channel, "F")
+	case commands.StringContainsArray(m.Content, []string{"фото член дрочить", "дрочить", "порно"}):
+		commands.SendRandomFileFromFolder(s, channel, "cock")
+	case commands.StringContainsArray(m.Content, []string{"loss", "потеря"}):
+		commands.SendRandomFileFromFolder(s, channel, "loss")
+	case commands.StringContainsArray(m.Content, []string{"amogus", "амогус", "амонг", "amog", "а мог", "сус", "sus", "among us"}):
+		commands.SendRandomFileFromFolder(s, channel, "amogus")
+	case commands.StringContains(m.Content, "козлов"), commands.StringContains(m.Content, "кызлар"):
+		commands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"kozlov1.jpg")
+		time.Sleep(1 * time.Second)
+		commands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"kozlov2.jpg")
+	case commands.StringContains(m.Content, "русские вперед"), commands.StringContains(m.Content, "русские вперёд"):
+		commands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"russiansgo.jpg")
+	case commands.StringContainsArray(m.Content, []string{"пошел нахер", "пошёл нахер", "пошёл ты нахер козёл", "пошёл ты нахер козел", "пошел ты нахер козёл", "пошел ты нахер козел"}):
+		s.ChannelMessageSend(channel, "https://youtu.be/qks8SgT1B4M")
+	case commands.StringStartsWith(m.Content, "roll"), commands.StringStartsWith(m.Content, "ролляй"), commands.StringStartsWith(m.Content, "роляй"), commands.StringStartsWith(m.Content, "ролл"):
+		message := strings.Split(m.Content, " ")
+		var response string
+		if len(message) > 1 {
+			num, _ := strconv.Atoi(message[1])
+			response = commands.Roll(num)
+		} else {
+			response = commands.Roll(100)
+		}
+		s.ChannelMessageSend(channel, response)
+	case commands.StringContains(m.Content, "посмотрим"), commands.StringContains(m.Content, "will see"), commands.StringContains(m.Content, "will see"):
+		commands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"WillSee.jpg")
+	case commands.StringContainsArray(m.Content, []string{"кастом", "ресел", "кемп", "дроп", "км", "сток", "сникеры", "хайпбист", "оффер", "сайз", "кондей", "ритейл", "легит чек",
+		"броук", "лейм", "шакал", "кук группа", "лоуболлер"}):
+		commands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"custom.jpg")
+	case commands.StringContains(m.Content, "ты кто"), commands.StringContains(m.Content, "кто это"), commands.StringContains(m.Content, "это кто"):
+		s.ChannelMessageSend(channel, "Я Дарцаев Исмаил Умарпашаевич 11 микрорайон космонавтов 54 приезжайте я чеченец таких пидорасов я буду разъебывать, и вас я буду разъебывать")
+		commands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"ismail.jpg")
+	case commands.StringContains(m.Content, "сука"), commands.StringContains(m.Content, "cerf"):
+		if m.Author.ID == "333341352404320267" {
+			s.ChannelMessageSend(channel, "Ну тут сыглы")
+		} else {
+			s.ChannelMessageSend(channel, "Сам сука")
+		}
+	case commands.StringContains(m.Content, "что делать"),
+		commands.StringContains(m.Content, "че делать"),
+		commands.StringContains(m.Content, "че сделать"),
+		commands.StringContains(m.Content, "что сделать"):
+		commands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"choosepudge.jpg")
+	case commands.StringContains(m.Content, "мем"), commands.StringContains(m.Content, "meme"):
+		commands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"meme.jpg")
+	case commands.StringStartsWith(m.Content, "удали"):
+		commands.Delete(s, channel, m)
+	case commands.StringContains(m.Content, "вадим"), m.Author.ID == "395304841812901888":
+		s.ChannelMessageSend(channel, "А вы в курсе что Вадим натурал?")
+		// discordgo.MessageEmbed
+		// s.ChannelMessageSendEmbed()
 	}
 }
 
