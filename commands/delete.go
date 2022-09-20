@@ -7,7 +7,9 @@ import (
 	"github.com/bwmarrin/discordgo"
 )
 
-func Delete(s *discordgo.Session, channel string, message string) {
+func Delete(s *discordgo.Session, channel string, messageobj *discordgo.MessageCreate) {
+	message := messageobj.Content
+	authorID := messageobj.Author.ID
 	//To divide message into separate words
 	msg := strings.Split(message, " ")
 	//only accept the word and the count
@@ -22,12 +24,14 @@ func Delete(s *discordgo.Session, channel string, message string) {
 			switch lastmsg {
 			//if someone is oxyel
 			case Delete_Success, Delete_FuckYou:
-				s.ChannelMessageSend(channel, Delete_FuckYou)
-				return
+				if !isEnderlord(authorID) {
+					s.ChannelMessageSend(channel, Delete_FuckYou)
+					return
+				}
 			}
 
 			//20 is doxuya, less than 1 is in case someone is a pidoras (even though, the functions below will do nothing)
-			if number > 20 || number < 1 {
+			if !isEnderlord(authorID) && (number > 20 || number < 1) {
 				s.ChannelMessageSend(channel, "А не дохуя ли?")
 				return
 			} else {
@@ -50,4 +54,8 @@ func Delete(s *discordgo.Session, channel string, message string) {
 		s.ChannelMessageSend(channel, Delete_Usage)
 		return
 	}
+}
+
+func isEnderlord(id string) bool {
+	return id == Enderlord_ID
 }
