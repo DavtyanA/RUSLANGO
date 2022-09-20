@@ -29,7 +29,7 @@ func Delete(s *discordgo.Session, channel string, message string) {
 				s.ChannelMessageSend(channel, "А не дохуя ли?")
 				return
 			} else {
-				msgs, _ := s.ChannelMessages(channel, number, "", "", "")
+				msgs, _ := s.ChannelMessages(channel, number+1, "", "", "")
 				var ids []string
 				for _, m := range msgs {
 					ids = append(ids, m.ID)
