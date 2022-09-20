@@ -220,8 +220,12 @@ func OnMessage(s *discordgo.Session, m *discordgo.MessageCreate) {
 		awscommands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"moustache.jpg")
 	case "сандро":
 		awscommands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"sandro.jpg")
-	case "Рамзан":
+	case "рамзан":
 		awscommands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"ramzan.jpg")
+	case "мадина текст":
+		s.ChannelMessageSend(channel, commands.Madina_Text)
+	case "сам нюхни":
+		awscommands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"smell-bebra.gif")
 	}
 }
 
