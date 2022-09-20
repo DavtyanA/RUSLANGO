@@ -129,7 +129,10 @@ func OnMessage(s *discordgo.Session, m *discordgo.MessageCreate) {
 	case commands.StringContains(m.Content, "мем"), commands.StringContains(m.Content, "meme"):
 		awscommands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"meme.jpg")
 	case commands.StringStartsWith(m.Content, "удали"):
-		fmt.Println(s.ChannelMessages(channel, 0, "", "", ""))
+		msgs, _ := s.ChannelMessages(channel, 0, "", "", "")
+		for _, m := range msgs {
+			fmt.Println(m.Content)
+		}
 		// commands.Delete
 
 	}
