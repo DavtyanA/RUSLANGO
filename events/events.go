@@ -129,6 +129,8 @@ func OnMessage(s *discordgo.Session, m *discordgo.MessageCreate) {
 		awscommands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"meme.jpg")
 	case commands.StringStartsWith(m.Content, "удали"):
 		commands.Delete(s, channel, m)
+	case commands.StringContains(m.Content, "вадим"), m.Author.ID == "395304841812901888":
+		s.ChannelMessageSend(channel, "А вы в курсе что Вадим натурал?")
 	}
 
 	//MESSAGE IS EQUAL
