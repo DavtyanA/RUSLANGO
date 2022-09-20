@@ -77,18 +77,22 @@ func OnMessage(s *discordgo.Session, m *discordgo.MessageCreate) {
 	// SMELL THE BEBRA!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!11
 
 	switch {
+	case commands.StringContainsArray(m.Content, []string{"нюх бебр", "нюхай бебру", "smell bebr", "smell the bebra", "smell bebra"}):
+		awscommands.SendRandomFileFromFolder(s, channel, "bebra")
+	case commands.StringContainsArray(m.Content, []string{"бан", "ban"}):
+		awscommands.SendRandomFileFromFolder(s, channel, "ban")
+	case commands.StringContainsArray(m.Content, []string{"loss", "потеря", "пиздец", "бля...", "жаль", "грустно", "хуево", "хуёво", "мде", "press f"}),
+		strings.ToLower(m.Content) == "f":
+		awscommands.SendRandomFileFromFolder(s, channel, "F")
+	case commands.StringContainsArray(m.Content, []string{"фото член дрочить", "дрочить", "порно"}):
+		awscommands.SendRandomFileFromFolder(s, channel, "cock")
 	case commands.StringContains(m.Content, "козлов"), commands.StringContains(m.Content, "кызлар"):
 		awscommands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"kozlov1.jpg")
 		time.Sleep(1 * time.Second)
 		awscommands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"kozlov2.jpg")
 	case commands.StringContains(m.Content, "русские вперед"), commands.StringContains(m.Content, "русские вперёд"):
 		awscommands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"russiansgo.jpg")
-	case commands.StringContains(m.Content, "пошел нахер"),
-		commands.StringContains(m.Content, "пошёл нахер"),
-		commands.StringContains(m.Content, "пошёл ты нахер козёл"),
-		commands.StringContains(m.Content, "пошёл ты нахер козел"),
-		commands.StringContains(m.Content, "пошел ты нахер козёл"),
-		commands.StringContains(m.Content, "пошел ты нахер козел"):
+	case commands.StringContainsArray(m.Content, []string{"пошел нахер", "пошёл нахер", "пошёл ты нахер козёл", "пошёл ты нахер козел", "пошел ты нахер козёл", "пошел ты нахер козел"}):
 		s.ChannelMessageSend(channel, "https://youtu.be/qks8SgT1B4M")
 	case commands.StringStartsWith(m.Content, "roll"), commands.StringStartsWith(m.Content, "ролляй"), commands.StringStartsWith(m.Content, "роляй"), commands.StringStartsWith(m.Content, "ролл"):
 		message := strings.Split(m.Content, " ")
