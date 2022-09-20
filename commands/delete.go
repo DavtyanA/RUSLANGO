@@ -1,6 +1,7 @@
 package commands
 
 import (
+	"fmt"
 	"strconv"
 	"strings"
 
@@ -17,6 +18,7 @@ func Delete(s *discordgo.Session, channel string, message string) {
 		if err == nil {
 			chann, _ := s.Channel(channel)
 			lastmsg, _ := s.ChannelMessage(channel, chann.LastMessageID)
+			fmt.Println(lastmsg.Content)
 			switch lastmsg.Content {
 			//if someone is oxyel
 			case Delete_Success, Delete_FuckYou:
