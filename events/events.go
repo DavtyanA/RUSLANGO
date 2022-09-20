@@ -81,13 +81,14 @@ func OnMessage(s *discordgo.Session, m *discordgo.MessageCreate) {
 		awscommands.SendRandomFileFromFolder(s, channel, "bebra")
 	case commands.StringContainsArray(m.Content, []string{"бан", "ban"}):
 		awscommands.SendRandomFileFromFolder(s, channel, "ban")
-	case commands.StringContainsArray(m.Content, []string{"пиздец", "бля...", "жаль", "грустно", "хуево", "хуёво", "мде", "press f"}),
-		strings.ToLower(m.Content) == "f":
+	case commands.StringContainsArray(m.Content, []string{"пиздец", "бля...", "жаль", "грустно", "хуево", "хуёво", "мде", "press f"}), strings.ToLower(m.Content) == "f":
 		awscommands.SendRandomFileFromFolder(s, channel, "F")
 	case commands.StringContainsArray(m.Content, []string{"фото член дрочить", "дрочить", "порно"}):
 		awscommands.SendRandomFileFromFolder(s, channel, "cock")
 	case commands.StringContainsArray(m.Content, []string{"loss", "потеря"}):
 		awscommands.SendRandomFileFromFolder(s, channel, "loss")
+	case commands.StringContainsArray(m.Content, []string{"amogus", "амогус", "амонг", "amog", "а мог", "сус", "sus", "among us"}):
+		awscommands.SendRandomFileFromFolder(s, channel, "amogus")
 	case commands.StringContains(m.Content, "козлов"), commands.StringContains(m.Content, "кызлар"):
 		awscommands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"kozlov1.jpg")
 		time.Sleep(1 * time.Second)
