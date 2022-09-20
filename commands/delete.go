@@ -25,7 +25,7 @@ func Delete(s *discordgo.Session, channel string, message string) {
 			}
 
 			//20 is doxuya, less than 1 is in case someone is a pidoras (even though, the functions below will do nothing)
-			if number > 20 && number < 1 {
+			if number > 20 || number < 1 {
 				s.ChannelMessageSend(channel, "А не дохуя ли?")
 				return
 			} else {
