@@ -77,7 +77,7 @@ func OnMessage(s *discordgo.Session, m *discordgo.MessageCreate) {
 	// SMELL THE BEBRA!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!11
 
 	switch {
-	case commands.StringContainsArray(m.Content, []string{"нюх бебр", "нюхай бебру", "smell bebr", "smell the bebra", "smell bebra"}):
+	case commands.StringContainsArray(m.Content, []string{"бебр", "bebr"}):
 		awscommands.SendRandomFileFromFolder(s, channel, "bebra")
 	case commands.StringContainsArray(m.Content, []string{"бан", "ban"}):
 		awscommands.SendRandomFileFromFolder(s, channel, "ban")
