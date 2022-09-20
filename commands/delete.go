@@ -1,7 +1,6 @@
 package commands
 
 import (
-	"fmt"
 	"strconv"
 	"strings"
 
@@ -16,10 +15,11 @@ func Delete(s *discordgo.Session, channel string, message string) {
 		//if the second element is number, proceed, otherwise alert the user
 		number, err := strconv.Atoi(msg[1])
 		if err == nil {
-			chann, _ := s.Channel(channel)
-			lastmsg, _ := s.ChannelMessage(channel, chann.LastMessageID)
-			fmt.Println(lastmsg.Content)
-			switch lastmsg.Content {
+			// chann, _ := s.Channel(channel)
+			msgs, _ := s.ChannelMessages(channel, 2, "", "", "")
+			//Second to last
+			lastmsg := msgs[1].Content
+			switch lastmsg {
 			//if someone is oxyel
 			case Delete_Success, Delete_FuckYou:
 				s.ChannelMessageSend(channel, Delete_FuckYou)
