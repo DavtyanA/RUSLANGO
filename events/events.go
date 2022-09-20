@@ -128,6 +128,15 @@ func OnMessage(s *discordgo.Session, m *discordgo.MessageCreate) {
 		awscommands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"choosepudge.jpg")
 	case commands.StringContains(m.Content, "мем"), commands.StringContains(m.Content, "meme"):
 		awscommands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"meme.jpg")
+	case commands.StringStartsWith(m.Content, "удали"):
+		if len(strings.Split(m.Content, " ")) == 2 {
+			chann, _ := s.Channel(channel)
+			fmt.Println(chann.Messages)
+			// s.ChannelMessageDelete()
+		} else {
+			s.ChannelMessageSend(channel, "Я не знаю хотел ты удалить сообщения или нет, но если хотел, нужно написать сколько. Например 'Удали 5'")
+		}
+
 	}
 
 	//MESSAGE IS EQUAL
@@ -160,7 +169,6 @@ func OnMessage(s *discordgo.Session, m *discordgo.MessageCreate) {
 	case "справедливо":
 		awscommands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"orehus-sticker.png")
 		chann, _ := s.Channel(channel) //idk what anme to give
-		fmt.Println(chann.LastMessageID)
 		s.MessageReactionAdd(channel, chann.LastMessageID, ":orehus:400349897578250255")
 	case "кто", "кто?":
 		s.ChannelMessageSend(channel, "Дарцаев Исмаил Умарпашаевич 11 микрорайон космонавтов 54 приезжайте я чеченец таких пидорасов я буду разъебывать, и вас я буду разъебывать")
