@@ -129,13 +129,8 @@ func OnMessage(s *discordgo.Session, m *discordgo.MessageCreate) {
 	case commands.StringContains(m.Content, "мем"), commands.StringContains(m.Content, "meme"):
 		awscommands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"meme.jpg")
 	case commands.StringStartsWith(m.Content, "удали"):
-		if len(strings.Split(m.Content, " ")) == 2 {
-			chann, _ := s.Channel(channel)
-			fmt.Println(chann.Messages)
-			// s.ChannelMessageDelete()
-		} else {
-			s.ChannelMessageSend(channel, "Я не знаю хотел ты удалить сообщения или нет, но если хотел, нужно написать сколько. Например 'Удали 5'")
-		}
+		fmt.Println(s.ChannelMessages(channel, 0, "", "", ""))
+		// commands.Delete
 
 	}
 
