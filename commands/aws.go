@@ -1,7 +1,6 @@
-package awscommands
+package commands
 
 import (
-	"RUSLANGO/commands"
 	"fmt"
 	"os"
 	"path/filepath"
@@ -28,7 +27,7 @@ func init() {
 	)
 
 }
-func downloadFromS3Bucket(item string) string {
+func downloadFromS3Bucket(item string) (string, error) {
 	//downloader for s3 items
 	downloader := s3manager.NewDownloader(sess)
 	//for some reason when you create a file with full item name/path it gives you an error
@@ -37,6 +36,7 @@ func downloadFromS3Bucket(item string) string {
 	file, err := os.Create("tmp/" + fileName)
 	if err != nil {
 		fmt.Println("error creating a file", fileName, err)
+		return file.Name(), err
 	}
 	defer file.Close()
 	numBytes, err := downloader.Download(file,
@@ -46,13 +46,14 @@ func downloadFromS3Bucket(item string) string {
 		})
 	if err != nil {
 		fmt.Println("error downloading the file", item, err)
+		return file.Name(), err
 	} else {
 		fmt.Println("Downloaded", file.Name(), numBytes, "bytes")
+		return file.Name(), err
 	}
-	return file.Name()
 }
 
-func downloadFromS3BucketFolder(folder string) string {
+func downloadFromS3BucketFolder(folder string) (string, error) {
 
 	//lister (?) to list items in a bucket
 	svc := s3.New(sess)
@@ -63,25 +64,33 @@ func downloadFromS3BucketFolder(folder string) string {
 	})
 
 	if err != nil {
-		fmt.Println("Unable to list items in bucket", bucket, err)
+		return "Could not get bucket, pls contact Oleg Ermolaev", err
 	}
 
 	//get a random item from the list of items in the bucket
 	items := resp.Contents
-	item := *commands.GetRandomItem(items).Key
+	item := *GetRandomItem(items).Key
 	return downloadFromS3Bucket(item)
 }
 
-func SendRandomFileFromFolder(s *discordgo.Session, c string, folder string) {
+func SendRandomFileFromFolder(s *discordgo.Session, channel string, folder string) {
 
 	//download file from s3 bucket and folder, returns the name of the file
-	fileName := downloadFromS3BucketFolder(folder)
-	sendFile(s, c, fileName)
+	fileName, err := downloadFromS3BucketFolder(folder)
+	if err != nil {
+		fmt.Println("Unable to get items from bucket", err)
+		s.ChannelMessageSend(channel, "ойой чета паламалась( Напиши Ендерлолу он там посмотрит че поломалось")
+	}
+	sendFile(s, channel, fileName)
 }
 
-func SendFileFromS3(s *discordgo.Session, c string, item string) {
-	fileName := downloadFromS3Bucket(item)
-	sendFile(s, c, fileName)
+func SendFileFromS3(s *discordgo.Session, channel string, item string) {
+	fileName, err := downloadFromS3Bucket(item)
+	if err != nil {
+		fmt.Println("Unable to get an item from bucket", err)
+		s.ChannelMessageSend(channel, "ойой чета паламалась( Напиши Ендерлолу он там посмотрит че поломалось")
+	}
+	sendFile(s, channel, fileName)
 }
 
 func sendFile(s *discordgo.Session, channel string, fileName string) {
@@ -89,8 +98,10 @@ func sendFile(s *discordgo.Session, channel string, fileName string) {
 	file, err := os.Open(fileName)
 	if err != nil {
 		fmt.Println("error opening a file "+file.Name(), err)
-	}
+		s.ChannelMessageSend(channel, "ойой чета паламалась( Напиши Ендерлолу он там посмотрит че поломалось")
+	} else {
 	s.ChannelFileSend(channel, filepath.Base(file.Name()), file)
 	//to not leave any leftovers
 	os.Remove(file.Name())
+	}
 }

@@ -1,7 +1,6 @@
 package events
 
 import (
-	"RUSLANGO/awscommands"
 	"RUSLANGO/commands"
 	"strconv"
 	"strings"
@@ -77,23 +76,23 @@ func OnMessage(s *discordgo.Session, m *discordgo.MessageCreate) {
 
 	switch {
 	case commands.StringContainsArray(m.Content, []string{"бебр", "bebr"}):
-		awscommands.SendRandomFileFromFolder(s, channel, "bebra")
+		commands.SendRandomFileFromFolder(s, channel, "bebra")
 	case commands.StringContainsArray(m.Content, []string{"бан", "ban"}):
-		awscommands.SendRandomFileFromFolder(s, channel, "ban")
+		commands.SendRandomFileFromFolder(s, channel, "ban")
 	case commands.StringContainsArray(m.Content, []string{"пиздец", "бля...", "жаль", "грустно", "хуево", "хуёво", "мде", "press f"}), strings.ToLower(m.Content) == "f":
-		awscommands.SendRandomFileFromFolder(s, channel, "F")
+		commands.SendRandomFileFromFolder(s, channel, "F")
 	case commands.StringContainsArray(m.Content, []string{"фото член дрочить", "дрочить", "порно"}):
-		awscommands.SendRandomFileFromFolder(s, channel, "cock")
+		commands.SendRandomFileFromFolder(s, channel, "cock")
 	case commands.StringContainsArray(m.Content, []string{"loss", "потеря"}):
-		awscommands.SendRandomFileFromFolder(s, channel, "loss")
+		commands.SendRandomFileFromFolder(s, channel, "loss")
 	case commands.StringContainsArray(m.Content, []string{"amogus", "амогус", "амонг", "amog", "а мог", "сус", "sus", "among us"}):
-		awscommands.SendRandomFileFromFolder(s, channel, "amogus")
+		commands.SendRandomFileFromFolder(s, channel, "amogus")
 	case commands.StringContains(m.Content, "козлов"), commands.StringContains(m.Content, "кызлар"):
-		awscommands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"kozlov1.jpg")
+		commands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"kozlov1.jpg")
 		time.Sleep(1 * time.Second)
-		awscommands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"kozlov2.jpg")
+		commands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"kozlov2.jpg")
 	case commands.StringContains(m.Content, "русские вперед"), commands.StringContains(m.Content, "русские вперёд"):
-		awscommands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"russiansgo.jpg")
+		commands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"russiansgo.jpg")
 	case commands.StringContainsArray(m.Content, []string{"пошел нахер", "пошёл нахер", "пошёл ты нахер козёл", "пошёл ты нахер козел", "пошел ты нахер козёл", "пошел ты нахер козел"}):
 		s.ChannelMessageSend(channel, "https://youtu.be/qks8SgT1B4M")
 	case commands.StringStartsWith(m.Content, "roll"), commands.StringStartsWith(m.Content, "ролляй"), commands.StringStartsWith(m.Content, "роляй"), commands.StringStartsWith(m.Content, "ролл"):
@@ -107,13 +106,13 @@ func OnMessage(s *discordgo.Session, m *discordgo.MessageCreate) {
 		}
 		s.ChannelMessageSend(channel, response)
 	case commands.StringContains(m.Content, "посмотрим"), commands.StringContains(m.Content, "will see"), commands.StringContains(m.Content, "will see"):
-		awscommands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"WillSee.jpg")
+		commands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"WillSee.jpg")
 	case commands.StringContainsArray(m.Content, []string{"кастом", "ресел", "кемп", "дроп", "км", "сток", "сникеры", "хайпбист", "оффер", "сайз", "кондей", "ритейл", "легит чек",
 		"броук", "лейм", "шакал", "кук группа", "лоуболлер"}):
-		awscommands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"custom.jpg")
+		commands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"custom.jpg")
 	case commands.StringContains(m.Content, "ты кто"), commands.StringContains(m.Content, "кто это"), commands.StringContains(m.Content, "это кто"):
 		s.ChannelMessageSend(channel, "Я Дарцаев Исмаил Умарпашаевич 11 микрорайон космонавтов 54 приезжайте я чеченец таких пидорасов я буду разъебывать, и вас я буду разъебывать")
-		awscommands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"ismail.jpg")
+		commands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"ismail.jpg")
 	case commands.StringContains(m.Content, "сука"), commands.StringContains(m.Content, "cerf"):
 		if m.Author.ID == "333341352404320267" {
 			s.ChannelMessageSend(channel, "Ну тут сыглы")
@@ -124,9 +123,9 @@ func OnMessage(s *discordgo.Session, m *discordgo.MessageCreate) {
 		commands.StringContains(m.Content, "че делать"),
 		commands.StringContains(m.Content, "че сделать"),
 		commands.StringContains(m.Content, "что сделать"):
-		awscommands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"choosepudge.jpg")
+		commands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"choosepudge.jpg")
 	case commands.StringContains(m.Content, "мем"), commands.StringContains(m.Content, "meme"):
-		awscommands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"meme.jpg")
+		commands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"meme.jpg")
 	case commands.StringStartsWith(m.Content, "удали"):
 		commands.Delete(s, channel, m)
 	case commands.StringContains(m.Content, "вадим"), m.Author.ID == "395304841812901888":
@@ -136,7 +135,7 @@ func OnMessage(s *discordgo.Session, m *discordgo.MessageCreate) {
 	//MESSAGE IS EQUAL
 	switch strings.ToLower(m.Content) {
 	case "руслан":
-		awscommands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"ismail.jpg")
+		commands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"ismail.jpg")
 		s.ChannelMessageSend(channel, "Я НОВЫЙ УСОВЕРШЕНСТВОВАННЫЙ РУСЛАН, RUSLAN GO!")
 
 	case "пошел нахуй", "пошёл нахуй", "иди нахуй", "пошол нахуй", "пишов нахуй", "пашел нахуй", "пашол нахуй":
@@ -156,17 +155,17 @@ func OnMessage(s *discordgo.Session, m *discordgo.MessageCreate) {
 		s.ChannelMessageSend(channel, response)
 
 	case "споки", "спокойной ночи", "сладких снов":
-		awscommands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"isleep.gif")
+		commands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"isleep.gif")
 	case "во что поиграть", "во что поиграть?":
 		response := commands.WhatToPlay(m.Author.ID)
 		s.ChannelMessageSend(channel, response)
 	case "справедливо":
-		awscommands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"orehus-sticker.png")
+		commands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"orehus-sticker.png")
 		chann, _ := s.Channel(channel) //idk what anme to give
 		s.MessageReactionAdd(channel, chann.LastMessageID, ":orehus:400349897578250255")
 	case "кто", "кто?":
 		s.ChannelMessageSend(channel, "Дарцаев Исмаил Умарпашаевич 11 микрорайон космонавтов 54 приезжайте я чеченец таких пидорасов я буду разъебывать, и вас я буду разъебывать")
-		awscommands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"ismail.jpg")
+		commands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"ismail.jpg")
 	case "бот":
 		s.ChannelMessageSend(channel, "Чё надо?")
 	case "канал":
@@ -195,43 +194,49 @@ func OnMessage(s *discordgo.Session, m *discordgo.MessageCreate) {
 	case "никита пидорас соси хуй":
 		s.ChannelMessageSend(channel, "Big Facts...")
 	case "олег пидорас соси хуй":
-		awscommands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"olegfuckyou.jpg")
+		commands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"olegfuckyou.jpg")
 	case "как дела", "как дела?":
 		s.ChannelMessageSend(channel, "Пока не родила")
 	case "нихуя":
-		awscommands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"nixuya.jpg")
+		commands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"nixuya.jpg")
 	case "batman":
-		awscommands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"batman.jpg")
+		commands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"batman.jpg")
 	case "блядь":
-		awscommands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"blyad.jpg")
+		commands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"blyad.jpg")
 	case "вадим":
-		awscommands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"vadim.jpg")
+		commands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"vadim.jpg")
 	case "лучший герой в доте":
-		awscommands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"pudge.jpg")
+		commands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"pudge.jpg")
 	case "хуя":
-		awscommands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"xuya.jpg")
+		commands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"xuya.jpg")
 	case "бля":
-		awscommands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"blep.jpg")
+		commands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"blep.jpg")
 	case "блятб":
-		awscommands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"blyatb.jpg")
+		commands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"blyatb.jpg")
 	case "zipper":
-		awscommands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"bruno.png")
+		commands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"bruno.png")
 	case "мясо":
-		awscommands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"myaso.jpg")
+		commands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"myaso.jpg")
 	case "усы":
-		awscommands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"moustache.jpg")
+		commands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"moustache.jpg")
 	case "сандро":
-		awscommands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"sandro.jpg")
+		commands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"sandro.jpg")
 	case "рамзан":
-		awscommands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"ramzan.jpg")
+		commands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"ramzan.jpg")
 	case "мадина текст":
 		s.ChannelMessageSend(channel, commands.Madina_Text)
 	case "сам нюхни":
-		awscommands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"smell-bebra.gif")
+		commands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"smell-bebra.gif")
 	case "lf", "da", "да", "ну да":
-		awscommands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"pizda.gif")
+		commands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"pizda.gif")
 	case "серьезно?":
-		awscommands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"pizdabol.gif")
+		commands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"pizdabol.gif")
+	case "расскажи историю":
+		if commands.Roll(1) == "1" {
+			s.ChannelMessageSend(channel, commands.StoryTelling())
+		} else {
+			commands.MegaStory(s, channel)
+		}
 	}
 }
 
