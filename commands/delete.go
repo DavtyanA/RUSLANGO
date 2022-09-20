@@ -35,6 +35,7 @@ func Delete(s *discordgo.Session, channel string, message string) {
 					ids = append(ids, m.ID)
 				}
 				s.ChannelMessagesBulkDelete(channel, ids)
+				s.ChannelMessageSend(channel, Delete_Success)
 				return
 			}
 
