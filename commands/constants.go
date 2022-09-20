@@ -43,4 +43,8 @@ const (
 	||:one:||||:one:||||:two:||||:boom:||||:one:||||:stop_button:||||:one:||||:two:||||:boom:||
 	||:stop_button:||||:stop_button:||||:one:||||:two:||||:two:||||:one:||||:two:||||:boom:||||:three:||
 	||:stop_button:||||:stop_button:||||:stop_button:||||:one:||||:boom:||||:one:||||:two:||||:boom:||||:two:||`
+
+	Delete_Usage   = "Я не знаю хотел ты удалить сообщения или нет, но если хотел, нужно написать сколько. Например 'Удали 5'"
+	Delete_Success = "Мусор вынесен!"
+	Delete_FuckYou = "Мусор уже вынесли, пиздуй давай"
 )
