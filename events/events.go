@@ -206,8 +206,12 @@ func OnMessage(s *discordgo.Session, m *discordgo.MessageCreate) {
 		message := strings.Split(m.Content, " ")
 		var response string
 		if len(message) > 1 {
-			num, _ := strconv.Atoi(message[1])
-			response = commands.Roll(num)
+			num, err := strconv.Atoi(message[1])
+			if err != nil {
+				response = "ептвою мать пиши нормально 'ролл 5', 'ролляй 100', 'roll 228' нахуй мне твои буквы"
+			} else {
+				response = commands.Roll(num)
+			}
 		} else {
 			response = commands.Roll(100)
 		}
