@@ -172,8 +172,8 @@ func OnMessage(s *discordgo.Session, m *discordgo.MessageCreate) {
 		commands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"pizda.gif")
 	case "серьезно?":
 		commands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"pizdabol.gif")
-	case "anek":
-		s.ChannelMessageSend(channel, commands.RandomAnek())
+	// case "anek":
+	// 	s.ChannelMessageSend(channel, commands.RandomAnek())
 	case "расскажи историю":
 		if commands.Roll(5) == "5" {
 			s.ChannelMessageSend(channel, commands.StoryTelling())
