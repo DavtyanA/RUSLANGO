@@ -27,6 +27,16 @@ func StringStartsWith(S string, sub string) bool {
 }
 
 //String contains but for array of substrings (for convenience)
+func StringStartsWithArray(S string, subs []string) bool {
+	for _, s := range subs {
+		if StringStartsWith(S, s) {
+			return true
+		}
+	}
+	return false
+}
+
+//String contains but for array of substrings (for convenience)
 func StringContainsArray(S string, subs []string) bool {
 	for _, s := range subs {
 		if StringContains(S, s) {

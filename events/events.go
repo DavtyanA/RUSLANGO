@@ -202,7 +202,7 @@ func OnMessage(s *discordgo.Session, m *discordgo.MessageCreate) {
 		commands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"russiansgo.jpg")
 	case commands.StringContainsArray(m.Content, []string{"пошел нахер", "пошёл нахер", "пошёл ты нахер козёл", "пошёл ты нахер козел", "пошел ты нахер козёл", "пошел ты нахер козел"}):
 		s.ChannelMessageSend(channel, "https://youtu.be/qks8SgT1B4M")
-	case commands.StringStartsWith(m.Content, "roll"), commands.StringStartsWith(m.Content, "ролляй"), commands.StringStartsWith(m.Content, "роляй"), commands.StringStartsWith(m.Content, "ролл"):
+	case commands.StringStartsWithArray(m.Content, []string{"roll", "ролляй", "роляй", "ролл"}):
 		message := strings.Split(m.Content, " ")
 		var response string
 		if len(message) > 1 {
