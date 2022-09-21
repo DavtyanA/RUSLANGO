@@ -102,6 +102,7 @@ func RandomAnek() string {
 			err = json.Unmarshal(body, &anekjson)
 			if err != nil || strings.HasPrefix(anekjson.Content, "Ошибка обращения к БД") {
 				fmt.Println("error:", err)
+				fmt.Println("resp body", string(body))
 				fmt.Println("anek at the end", anekjson.Content)
 				response = "Не удалось получить анек. Сервис поломался("
 			} else {
