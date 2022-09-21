@@ -2,6 +2,7 @@ package events
 
 import (
 	"RUSLANGO/commands"
+	"bytes"
 	"strconv"
 	"strings"
 	"time"
@@ -172,8 +173,16 @@ func OnMessage(s *discordgo.Session, m *discordgo.MessageCreate) {
 		commands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"pizda.gif")
 	case "серьезно?":
 		commands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"pizdabol.gif")
-	// case "anek":
-	// 	s.ChannelMessageSend(channel, commands.RandomAnek())
+	case "anek":
+		resp, err := s.Client.Get("http://rzhunemogu.ru/RandJSON.aspx?CType=1")
+		if err != nil{
+			s.ChannelMessageSend(channel, "zaloopa")
+		} else {
+			buf := new(bytes.Buffer)
+			buf.ReadFrom(resp.Body)
+		s.ChannelMessageSend(channel, buf.String())
+		// s.ChannelMessageSend(channel, commands.RandomAnek())
+		}
 	case "расскажи историю":
 		if commands.Roll(5) == "5" {
 			s.ChannelMessageSend(channel, commands.StoryTelling())
