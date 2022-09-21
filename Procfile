@@ -1,1 +1,1 @@
-worker: main
+worker: bin/main
