@@ -172,6 +172,8 @@ func OnMessage(s *discordgo.Session, m *discordgo.MessageCreate) {
 		commands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"pizda.gif")
 	case "серьезно?":
 		commands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"pizdabol.gif")
+	case "f":
+		commands.SendRandomFileFromFolder(s, channel, "F")
 	// case "anek":
 	// 	resp, err := s.Client.Get("http://rzhunemogu.ru/RandJSON.aspx?CType=1")
 	// 	if err != nil{
