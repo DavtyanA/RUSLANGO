@@ -2,6 +2,7 @@ package commands
 
 import (
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"net/http"
 	"strings"
@@ -87,15 +88,20 @@ func RandomAnek() string {
 	var response string
 	resp, err := http.Get("http://rzhunemogu.ru/RandJSON.aspx?CType=1")
 	if err != nil {
+		fmt.Println("error:", err)
 		response = "Не удалось получить анек. Сервис поломался("
 	} else {
 		body, err := ioutil.ReadAll(resp.Body)
 		if err != nil {
+			fmt.Println("error:", err)
+			fmt.Println("anek at the end", resp.Body)
 			response = "Не удалось получить анек. Сервис поломался("
 		} else {
 			anekjson := anekJSON{}
 			err = json.Unmarshal(body, &anekjson)
 			if err != nil || strings.HasPrefix(anekjson.Content, "Ошибка обращения к БД") {
+				fmt.Println("error:", err)
+				fmt.Println("anek at the end", anekjson.Content)
 				response = "Не удалось получить анек. Сервис поломался("
 			} else {
 				response = anekjson.Content
