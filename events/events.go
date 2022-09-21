@@ -208,7 +208,7 @@ func OnMessage(s *discordgo.Session, m *discordgo.MessageCreate) {
 		if len(message) > 1 {
 			num, err := strconv.Atoi(message[1])
 			if err != nil {
-				response = "ептвою мать пиши нормально 'ролл 5', 'ролляй 100', 'roll 228' нахуй мне твои буквы"
+				response = "ептвою мать пиши нормально `ролл 5`, `ролляй 100`, `roll 228` нахуй мне твои буквы"
 			} else {
 				response = commands.Roll(num)
 			}
