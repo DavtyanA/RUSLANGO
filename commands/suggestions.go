@@ -91,10 +91,11 @@ func RandomAnek() string {
 		fmt.Println("error:", err)
 		response = "Не удалось получить анек. Сервис поломался("
 	} else {
+
 		body, err := ioutil.ReadAll(resp.Body)
 		if err != nil {
 			fmt.Println("error:", err)
-			fmt.Println("anek at the end", resp.Body)
+			fmt.Println("anek at the middle", resp.Body)
 			response = "Не удалось получить анек. Сервис поломался("
 		} else {
 			anekjson := anekJSON{}
