@@ -72,7 +72,6 @@ func OnMessage(s *discordgo.Session, m *discordgo.MessageCreate) {
 
 	channel := m.ChannelID
 	var responses []string
-	// SMELL THE BEBRA!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!11
 
 	//MESSAGE IS EQUAL
 	switch strings.ToLower(m.Content) {
@@ -103,7 +102,7 @@ func OnMessage(s *discordgo.Session, m *discordgo.MessageCreate) {
 		s.ChannelMessageSend(channel, response)
 	case "справедливо":
 		commands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"orehus-sticker.png")
-		chann, _ := s.Channel(channel) //idk what anme to give
+		chann, _ := s.Channel(channel) //idk what name to give
 		s.MessageReactionAdd(channel, chann.LastMessageID, ":orehus:400349897578250255")
 	case "кто", "кто?":
 		s.ChannelMessageSend(channel, "Дарцаев Исмаил Умарпашаевич 11 микрорайон космонавтов 54 приезжайте я чеченец таких пидорасов я буду разъебывать, и вас я буду разъебывать")
@@ -173,6 +172,8 @@ func OnMessage(s *discordgo.Session, m *discordgo.MessageCreate) {
 		commands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"pizda.gif")
 	case "серьезно?":
 		commands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"pizdabol.gif")
+	case "anek":
+		s.ChannelMessageSend(channel, commands.RandomAnek())
 	case "расскажи историю":
 		if commands.Roll(5) == "5" {
 			s.ChannelMessageSend(channel, commands.StoryTelling())
@@ -249,80 +250,3 @@ func OnMessage(s *discordgo.Session, m *discordgo.MessageCreate) {
 func OnBotReady(s *discordgo.Session, m *discordgo.Connect) {
 	s.ChannelMessageSend(commands.Botchat_ID, "Я ТУТ ГАЙЗ")
 }
-
-// if m.Content == "!gopher" {
-
-// 	//Call the KuteGo API and retrieve our cute Dr Who Gopher
-// 	response, err := http.Get(KuteGoAPIURL + "/gopher/" + "dr-who")
-// 	if err != nil {
-// 		fmt.Println(err)
-// 	}
-// 	defer response.Body.Close()
-
-// 	if response.StatusCode == 200 {
-// 		_, err = s.ChannelFileSend(m.ChannelID, "dr-who.png", response.Body)
-// 		if err != nil {
-// 			fmt.Println(err)
-// 		}
-// 	} else {
-// 		fmt.Println("Error: Can't get dr-who Gopher! :-(")
-// 	}
-// }
-
-// if m.Content == "!random" {
-
-// 	//Call the KuteGo API and retrieve a random Gopher
-// 	response, err := http.Get(KuteGoAPIURL + "/gopher/random/")
-// 	if err != nil {
-// 		fmt.Println(err)
-// 	}
-// 	defer response.Body.Close()
-
-// 	if response.StatusCode == 200 {
-// 		_, err = s.ChannelFileSend(m.ChannelID, "random-gopher.png", response.Body)
-// 		if err != nil {
-// 			fmt.Println(err)
-// 		}
-// 	} else {
-// 		fmt.Println("Error: Can't get random Gopher! :-(")
-// 	}
-// }
-
-// if m.Content == "!gophers" {
-
-// 	//Call the KuteGo API and display the list of available Gophers
-// 	response, err := http.Get(KuteGoAPIURL + "/gophers/")
-// 	if err != nil {
-// 		fmt.Println(err)
-// 	}
-// 	defer response.Body.Close()
-
-// 	if response.StatusCode == 200 {
-// 		// Transform our response to a []byte
-// 		body, err := ioutil.ReadAll(response.Body)
-// 		if err != nil {
-// 			fmt.Println(err)
-// 		}
-
-// 		// Put only needed informations of the JSON document in our array of Gopher
-// 		var data []Gopher
-// 		err = json.Unmarshal(body, &data)
-// 		if err != nil {
-// 			fmt.Println(err)
-// 		}
-
-// 		// Create a string with all of the Gopher's name and a blank line as separator
-// 		var gophers strings.Builder
-// 		for _, gopher := range data {
-// 			gophers.WriteString(gopher.Name + "\n")
-// 		}
-
-// 		// Send a text message with the list of Gophers
-// 		_, err = s.ChannelMessageSend(m.ChannelID, gophers.String())
-// 		if err != nil {
-// 			fmt.Println(err)
-// 		}
-// 	} else {
-// 		fmt.Println("Error: Can't get list of Gophers! :-(")
-// 	}
-// }

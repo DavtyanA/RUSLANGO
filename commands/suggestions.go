@@ -1,5 +1,12 @@
 package commands
 
+import (
+	"encoding/json"
+	"io/ioutil"
+	"net/http"
+	"strings"
+)
+
 func WhatToPlay(authorID string) string {
 	var responses []string
 	name := "сука"
@@ -72,5 +79,32 @@ func StoryTelling() string {
 			"с ним поговорить, и он сейчас типо да ладно че такого, что у тебя есть парень, давай " +
 			"встретимся, так далее. Я такой Ммм заебись. Бля может сказ может самому с этим челом" +
 			" ради прикола встретиться"}
-		return GetRandomItem(responses)		
+	return GetRandomItem(responses)
+}
+
+//should probably change nested ifs
+func RandomAnek() string {
+	var response string
+	resp, err := http.Get("http://rzhunemogu.ru/RandJSON.aspx?CType=1")
+	if err != nil {
+		response = "Не удалось получить анек. Сервис поломался("
+	} else {
+		body, err := ioutil.ReadAll(resp.Body)
+		if err != nil {
+			response = "Не удалось получить анек. Сервис поломался("
+		} else {
+			anekjson := anekJSON{}
+			err = json.Unmarshal(body, &anekjson)
+			if err != nil || strings.HasPrefix(anekjson.Content, "Ошибка обращения к БД") {
+				response = "Не удалось получить анек. Сервис поломался("
+			} else {
+				response = anekjson.Content
+			}
+		}
+	}
+	return response
+}
+
+type anekJSON struct {
+	Content string `json:"content"`
 }
