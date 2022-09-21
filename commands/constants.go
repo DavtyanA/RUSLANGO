@@ -63,6 +63,7 @@ const (
 	Squirtana_ID 	= "516013742560116741"
 	Neaus_ID 		= "359012016876421131"
 	Ruslan_ID 		= "333341352404320267"
+	Ducks_Fuhrer_ID	= "395304841812901888"
 	//need to get women IDs, and Kozlov/Ruslan
 	// Zeeklik_ID 		= "378566714310262785"
 	// Zeeklik_ID 		= "378566714310262785"

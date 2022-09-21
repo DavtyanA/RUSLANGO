@@ -29,6 +29,8 @@ func WhatToPlay(authorID string) string {
 		name = "Дима"
 	case Neaus_ID:
 		name = "Карпов"
+	case Ducks_Fuhrer_ID:
+		name = "Вадим"
 	case Ruslan_ID:
 		name = "Руслан"
 		responses = append(responses, "Ты чё, долбоёб, сам с собой разговариваешь?")
