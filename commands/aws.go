@@ -80,8 +80,9 @@ func SendRandomFileFromFolder(s *discordgo.Session, channel string, folder strin
 	if err != nil {
 		fmt.Println("Unable to get items from bucket", err)
 		s.ChannelMessageSend(channel, "ойой чета паламалась( Напиши Ендерлолу он там посмотрит че поломалось")
+	} else {
+		sendFile(s, channel, fileName)
 	}
-	sendFile(s, channel, fileName)
 }
 
 func SendFileFromS3(s *discordgo.Session, channel string, item string) {
@@ -89,8 +90,9 @@ func SendFileFromS3(s *discordgo.Session, channel string, item string) {
 	if err != nil {
 		fmt.Println("Unable to get an item from bucket", err)
 		s.ChannelMessageSend(channel, "ойой чета паламалась( Напиши Ендерлолу он там посмотрит че поломалось")
+	} else {
+		sendFile(s, channel, fileName)
 	}
-	sendFile(s, channel, fileName)
 }
 
 func sendFile(s *discordgo.Session, channel string, fileName string) {
@@ -100,8 +102,8 @@ func sendFile(s *discordgo.Session, channel string, fileName string) {
 		fmt.Println("error opening a file "+file.Name(), err)
 		s.ChannelMessageSend(channel, "ойой чета паламалась( Напиши Ендерлолу он там посмотрит че поломалось")
 	} else {
-	s.ChannelFileSend(channel, filepath.Base(file.Name()), file)
-	//to not leave any leftovers
-	os.Remove(file.Name())
+		s.ChannelFileSend(channel, filepath.Base(file.Name()), file)
+		//to not leave any leftovers
+		os.Remove(file.Name())
 	}
 }
