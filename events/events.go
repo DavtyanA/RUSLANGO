@@ -151,7 +151,7 @@ func OnMessage(s *discordgo.Session, m *discordgo.MessageCreate) {
 	case "хуя":
 		commands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"xuya.jpg")
 	case "бля":
-		commands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"blep.jpg")
+		commands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"blep.png")
 	case "блятб":
 		commands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"blyatb.jpg")
 	case "zipper":
