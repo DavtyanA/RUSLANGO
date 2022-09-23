@@ -21,9 +21,10 @@ func Delete(s *discordgo.Session, channel string, messageobj *discordgo.MessageC
 			// chann, _ := s.Channel(channel)
 			msgs, _ := s.ChannelMessages(channel, 2, "", "", "")
 			//Second to last
-			lastmessage := msgs[1]
-			lastmsg := lastmessage.Content
-			switch lastmsg {
+			secondtolastmessage := msgs[1]
+			lastmessage := msgs[0]
+			slastmsg := secondtolastmessage.Content
+			switch slastmsg {
 			//if someone is oxyel
 			case Delete_Success, Delete_FuckYou:
 				if !isEnderlord(authorID) {
@@ -39,16 +40,23 @@ func Delete(s *discordgo.Session, channel string, messageobj *discordgo.MessageC
 			} else {
 				msgs, _ := s.ChannelMessages(channel, number+1, "", "", "")
 				var ids []string
-				fmt.Println(lastmessage.Author.Username + "Has deleted " + strconv.Itoa(len(ids)) + " messages: ")
 				for _, m := range msgs {
 					ids = append(ids, m.ID)
 				}
+				author := lastmessage.Author.Username
+				fmt.Println(author, "Has deleted", strconv.Itoa(len(ids)),"messages:")
 				s.ChannelMessagesBulkDelete(channel, ids)
 				s.ChannelMessageSend(channel, Delete_Success)
 				//because printing takes a long time, put it after everything's deleted
 				//I should look into threading or async processes for this
+				var sb strings.Builder
 				for _, m := range msgs {
-					fmt.Println("mesasge:", m.Content, m.Attachments[0].Filename, "\nauthor: ", m.Author.Username+"\n")
+					sb.WriteString(fmt.Sprint("message:", m.Content))
+					if len(m.Attachments) > 0{
+						sb.WriteString(m.Attachments[0].Filename + "\n")
+					}  
+					sb.WriteString(fmt.Sprint("author:", author, "\n"))
+					fmt.Println(sb.String())
 				}
 				return
 			}
