@@ -1,6 +1,7 @@
 package commands
 
 import (
+	"fmt"
 	"strconv"
 	"strings"
 
@@ -20,7 +21,8 @@ func Delete(s *discordgo.Session, channel string, messageobj *discordgo.MessageC
 			// chann, _ := s.Channel(channel)
 			msgs, _ := s.ChannelMessages(channel, 2, "", "", "")
 			//Second to last
-			lastmsg := msgs[1].Content
+			lastmessage := msgs[1]
+			lastmsg := lastmessage.Content
 			switch lastmsg {
 			//if someone is oxyel
 			case Delete_Success, Delete_FuckYou:
@@ -37,7 +39,9 @@ func Delete(s *discordgo.Session, channel string, messageobj *discordgo.MessageC
 			} else {
 				msgs, _ := s.ChannelMessages(channel, number+1, "", "", "")
 				var ids []string
+				fmt.Println(lastmessage.Author.Username + "Has deleted " + strconv.Itoa(len(ids)) + " messages: ")
 				for _, m := range msgs {
+					fmt.Println("mesasge: ", m.Content, "\n author: "+m.Author.Username+"\n\n")
 					ids = append(ids, m.ID)
 				}
 				s.ChannelMessagesBulkDelete(channel, ids)
