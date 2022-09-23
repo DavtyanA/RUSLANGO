@@ -44,7 +44,7 @@ func Delete(s *discordgo.Session, channel string, messageobj *discordgo.MessageC
 					ids = append(ids, m.ID)
 				}
 				author := lastmessage.Author.Username
-				fmt.Println(author, "Has deleted", strconv.Itoa(len(ids)),"messages:")
+				fmt.Println(author, "Has deleted", strconv.Itoa(len(ids) - 1),"messages:")
 				s.ChannelMessagesBulkDelete(channel, ids)
 				s.ChannelMessageSend(channel, Delete_Success)
 				//because printing takes a long time, put it after everything's deleted
@@ -55,7 +55,7 @@ func Delete(s *discordgo.Session, channel string, messageobj *discordgo.MessageC
 					if len(m.Attachments) > 0{
 						sb.WriteString(m.Attachments[0].Filename)
 					}  
-					sb.WriteString(fmt.Sprint("\nauthor:", author, "\n\n"))
+					sb.WriteString(fmt.Sprint("\nauthor:", author, "\n"))
 					fmt.Println(sb.String())
 				}
 				return
