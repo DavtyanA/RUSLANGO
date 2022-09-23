@@ -48,7 +48,7 @@ func Delete(s *discordgo.Session, channel string, messageobj *discordgo.MessageC
 				//because printing takes a long time, put it after everything's deleted
 				//I should look into threading or async processes for this
 				for _, m := range msgs {
-					fmt.Println("mesasge:", m.Content, "\nauthor: ", m.Author.Username+"\n")
+					fmt.Println("mesasge:", m.Content, m.Attachments[0].Filename, "\nauthor: ", m.Author.Username+"\n")
 				}
 				return
 			}
