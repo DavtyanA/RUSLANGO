@@ -1,13 +1,16 @@
 package commands
 
 import (
-	"encoding/json"
 	"fmt"
-	"io/ioutil"
+	"io"
+	"math/rand"
 	"net/http"
-	"strings"
+	"net/url"
+	"strconv"
+	"time"
 )
 
+// Suggest a game to play
 func WhatToPlay(authorID string) string {
 	var responses []string
 	name := "сука"
@@ -51,6 +54,7 @@ func WhatToPlay(authorID string) string {
 	return response
 }
 
+// Get a random story
 func StoryTelling() string {
 	responses := []string{"Бля, мне когда 5 лет было, у меня была серьезная болезнь, из-за которой " +
 		"я теперь жирный. В смысле ты не веришь? ой блять долбаеб я жирный не из-за болезни, " +
@@ -83,35 +87,46 @@ func StoryTelling() string {
 	return GetRandomItem(responses)
 }
 
-//should probably change nested ifs
-func RandomAnek() string {
-	var response string
-	resp, err := http.Get("http://rzhunemogu.ru/RandJSON.aspx?CType=1")
-	if err != nil {
-		fmt.Println("error:", err)
-		response = "Не удалось получить анек. Сервис поломался("
-	} else {
+// Get a random joke
+func GetRandomAnecdote() string {
+	api_url := "http://anecdotica.ru/api"
+	skey := "e741bcd7a1b58396d2dcf115088a72c3c8d4b32940204b5db61b7b10ee1f4f8c"
+	method := "getRandItem" //need 100 rublikov
 
-		body, err := ioutil.ReadAll(resp.Body)
+	q := url.Values{}
+	q.Set("pid", "k2rp6o52g1wd17ly432o")
+	q.Set("method", method)
+	q.Set("uts", fmt.Sprint(time.Now().Unix()))
+	// q.Set("category", "json")
+	q.Set("genre", "1")
+	q.Set("lang", "1")
+	q.Set("format", "txt")
+	q.Set("charset", "utf-8")
+	q.Set("markup", "1")
+	// q.Set("note", "0")
+	// q.Set("wlist", "0")
+	// q.Set("censor", "0")
+	q.Set("hash", GetMD5Hash(q.Encode()+skey))
+
+	final_url := api_url + "?" + q.Encode()
+	resp, err := http.Get(final_url)
+	if err != nil {
+		fmt.Println("error getting anek", err)
+		return ""
+	} else {
+		body, err := io.ReadAll(resp.Body)
 		if err != nil {
-			fmt.Println("error:", err)
-			fmt.Println("anek at the middle", resp.Body)
-			response = "Не удалось получить анек. Сервис поломался("
+			return "Не удалось получить анек. Сервис поломался("
 		} else {
-			anekjson := anekJSON{}
-			err = json.Unmarshal(body, &anekjson)
-			if err != nil || strings.HasPrefix(anekjson.Content, "Ошибка обращения к БД") {
-				fmt.Println("error:", err)
-				fmt.Println("anek at the end", anekjson.Content)
-				response = "Не удалось получить анек. Сервис поломался("
-			} else {
-				response = anekjson.Content
-			}
+			return string(body)
 		}
 	}
-	return response
 }
 
-type anekJSON struct {
-	Content string `json:"content"`
+// roll a random number between 0 and input
+func Roll(input int) string {
+	min := 0
+	max := input + 1
+	rand.Seed(time.Now().UnixNano())
+	return strconv.Itoa(rand.Intn(max-min) + min)
 }
