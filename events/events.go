@@ -191,7 +191,7 @@ func OnMessage(s *discordgo.Session, m *discordgo.MessageCreate) {
 		commands.SendRandomFileFromFolder(s, channel, "bebra")
 	case commands.StringContainsArray(m.Content, []string{"бан", "ban"}):
 		commands.SendRandomFileFromFolder(s, channel, "ban")
-	case commands.StringContainsArray(m.Content, []string{"пиздец", "бля...", "жаль", "грустно", "хуево", "хуёво", "мде", "press f"}): //need to remember the F above
+	case commands.StringContainsArray(m.Content, []string{"пиздец", "капец", "бля...", "жаль", "грустно", "хуево", "хуёво", "мде", "press f"}): //need to remember the F above
 		commands.SendRandomFileFromFolder(s, channel, "F")
 	case commands.StringContainsArray(m.Content, []string{"фото член дрочить", "дрочить", "порно"}):
 		commands.SendRandomFileFromFolder(s, channel, "cock")
