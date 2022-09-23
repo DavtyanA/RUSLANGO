@@ -41,6 +41,7 @@ func main() {
 
 	for range time.Tick(time.Minute) {
 		go func() {
+			fmt.Println(time.Now().Format(time.Kitchen))
 			if commands.CheckTimeForAnecdote() {
 				anecdote := commands.GetRandomAnecdote()
 				// s.ChannelFileSendWithMessage(channel, anecdote+"\n\n ДАННЫЙ АНЕКДОТ ПРОСПОНСИРОВАН ОЛЕГОМ ЕРМОЛАЕВЫМ", "oleg.jpg", )
