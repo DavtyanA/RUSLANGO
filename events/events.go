@@ -95,8 +95,8 @@ func OnMessage(s *discordgo.Session, m *discordgo.MessageCreate) {
 		response := commands.GetRandomItem(responses)
 		s.ChannelMessageSend(channel, response)
 
-	case "споки", "спокойной ночи", "сладких снов":
-		commands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"isleep.gif")
+	// case "споки", "спокойной ночи", "сладких снов":
+	// 	commands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"isleep.gif")
 	case "во что поиграть", "во что поиграть?":
 		response := commands.WhatToPlay(m.Author.ID)
 		s.ChannelMessageSend(channel, response)
@@ -173,17 +173,11 @@ func OnMessage(s *discordgo.Session, m *discordgo.MessageCreate) {
 	case "серьезно?":
 		commands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"pizdabol.gif")
 	case "f":
-		commands.SendRandomFileFromFolder(s, channel, "F")
-	// case "anek":
-	// 	resp, err := s.Client.Get("http://rzhunemogu.ru/RandJSON.aspx?CType=1")
-	// 	if err != nil{
-	// 		s.ChannelMessageSend(channel, "zaloopa")
-	// 	} else {
-	// 		buf := new(bytes.Buffer)
-	// 		buf.ReadFrom(resp.Body)
-	// 	s.ChannelMessageSend(channel, buf.String())
-	// 	// s.ChannelMessageSend(channel, commands.RandomAnek())
-	// 	}
+		commands.SendRandomFileFromFolder(s, channel, "F") //need to remember the F below
+	case "anek", "anec", "anecode", "анек", "анекдот", "юмор", "юмореска", "поржать", "ржать", "нуждик":
+		anecdote := commands.Make_request("getRandItem")
+		// s.ChannelFileSendWithMessage(channel, anecdote+"\n\n ДАННЫЙ АНЕКДОТ ПРОСПОНСИРОВАН ОЛЕГОМ ЕРМОЛАЕВЫМ", "oleg.jpg", )
+		s.ChannelMessageSend(channel, anecdote+"\n ДАННЫЙ АНЕКДОТ ПРОСПОНСИРОВАН ОЛЕГОМ ЕРМОЛАЕВЫМ")
 	case "расскажи историю":
 		if commands.Roll(5) == "5" {
 			s.ChannelMessageSend(channel, commands.StoryTelling())
@@ -197,7 +191,7 @@ func OnMessage(s *discordgo.Session, m *discordgo.MessageCreate) {
 		commands.SendRandomFileFromFolder(s, channel, "bebra")
 	case commands.StringContainsArray(m.Content, []string{"бан", "ban"}):
 		commands.SendRandomFileFromFolder(s, channel, "ban")
-	case commands.StringContainsArray(m.Content, []string{"пиздец", "бля...", "жаль", "грустно", "хуево", "хуёво", "мде", "press f"}), strings.ToLower(m.Content) == "f":
+	case commands.StringContainsArray(m.Content, []string{"пиздец", "бля...", "жаль", "грустно", "хуево", "хуёво", "мде", "press f"}): //need to remember the F above
 		commands.SendRandomFileFromFolder(s, channel, "F")
 	case commands.StringContainsArray(m.Content, []string{"фото член дрочить", "дрочить", "порно"}):
 		commands.SendRandomFileFromFolder(s, channel, "cock")
@@ -205,6 +199,8 @@ func OnMessage(s *discordgo.Session, m *discordgo.MessageCreate) {
 		commands.SendRandomFileFromFolder(s, channel, "loss")
 	case commands.StringContainsArray(m.Content, []string{"amogus", "амогус", "амонг", "amog", "а мог", "сус", "sus", "among us"}):
 		commands.SendRandomFileFromFolder(s, channel, "amogus")
+	case commands.StringStartsWith(m.Content, "споки"), commands.StringStartsWith(m.Content, "спокойной ночи"), commands.StringStartsWith(m.Content, "сладких снов"):
+		commands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"isleep.gif")
 	case commands.StringContains(m.Content, "козлов"), commands.StringContains(m.Content, "кызлар"):
 		commands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"kozlov1.jpg")
 		time.Sleep(1 * time.Second)
