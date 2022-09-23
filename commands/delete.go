@@ -53,9 +53,9 @@ func Delete(s *discordgo.Session, channel string, messageobj *discordgo.MessageC
 				for _, m := range msgs {
 					sb.WriteString(fmt.Sprint("message:", m.Content))
 					if len(m.Attachments) > 0{
-						sb.WriteString(m.Attachments[0].Filename + "\n")
+						sb.WriteString(m.Attachments[0].Filename)
 					}  
-					sb.WriteString(fmt.Sprint("author:", author, "\n"))
+					sb.WriteString(fmt.Sprint("\nauthor:", author, "\n\n"))
 					fmt.Println(sb.String())
 				}
 				return

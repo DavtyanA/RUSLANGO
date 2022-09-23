@@ -179,9 +179,9 @@ func OnMessage(s *discordgo.Session, m *discordgo.MessageCreate) {
 		s.ChannelMessageSend(channel, anecdote+"\n ДАННЫЙ АНЕКДОТ ПРОСПОНСИРОВАН ОЛЕГОМ ЕРМОЛАЕВЫМ")
 	case "расскажи историю":
 		if commands.Roll(5) == "5" {
-			s.ChannelMessageSend(channel, commands.StoryTelling())
-		} else {
 			commands.MegaStory(s, channel)
+		} else {
+			s.ChannelMessageSend(channel, commands.StoryTelling())
 		}
 	}
 
