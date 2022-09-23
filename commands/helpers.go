@@ -48,6 +48,7 @@ func StringContainsArray(S string, subs []string) bool {
 	return false
 }
 
+// Mega story created by Rustam ili Vova ya xz
 func MegaStory(s *discordgo.Session, channel string) {
 
 	SendFileFromS3(s, channel, Pictures_Folder_Other+"daiproidu.jpg")
@@ -71,7 +72,17 @@ func MegaStory(s *discordgo.Session, channel string) {
 	SendFileFromS3(s, channel, Pictures_Folder_Other+"blyatb.jpg")
 }
 
+// Get MD5 hash
 func GetMD5Hash(text string) string {
 	hash := md5.Sum([]byte(text))
 	return hex.EncodeToString(hash[:])
+}
+
+// Check for times to post anecdotes
+func CheckTimeForAnecdote() bool {
+	switch time.Now().Format(time.Kitchen) {
+	case "10:00AM", "1:00PM", "4:00PM", "11:00PM", "4:00AM":
+		return true
+	}
+	return false
 }

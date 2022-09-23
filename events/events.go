@@ -174,7 +174,7 @@ func OnMessage(s *discordgo.Session, m *discordgo.MessageCreate) {
 		commands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"pizdabol.gif")
 	case "f":
 		commands.SendRandomFileFromFolder(s, channel, "F") //need to remember the F below
-	case "anek", "anec", "anecode", "анек", "анекдот", "юмор", "юмореска", "поржать", "ржать", "нуждик":
+	case "anek", "anec", "anecode", "анек", "анекдот", "юмор", "юмореска", "поржать", "ржать", "нуждик", "fytr", "фтус", "фтул":
 		anecdote := commands.GetRandomAnecdote()
 		// s.ChannelFileSendWithMessage(channel, anecdote+"\n\n ДАННЫЙ АНЕКДОТ ПРОСПОНСИРОВАН ОЛЕГОМ ЕРМОЛАЕВЫМ", "oleg.jpg", )
 		s.ChannelMessageSend(channel, anecdote+"\n ДАННЫЙ АНЕКДОТ ПРОСПОНСИРОВАН ОЛЕГОМ ЕРМОЛАЕВЫМ")

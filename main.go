@@ -1,11 +1,13 @@
 package main
 
 import (
+	"RUSLANGO/commands"
 	"RUSLANGO/events"
 	"fmt"
 	"os"
 	"os/signal"
 	"syscall"
+	"time"
 
 	"github.com/bwmarrin/discordgo"
 )
@@ -35,6 +37,16 @@ func main() {
 	if err != nil {
 		fmt.Println("error opening connection,", err)
 		return
+	}
+
+	for range time.Tick(time.Minute) {
+		go func() {
+			if commands.CheckTimeForAnecdote() {
+				anecdote := commands.GetRandomAnecdote()
+				// s.ChannelFileSendWithMessage(channel, anecdote+"\n\n ДАННЫЙ АНЕКДОТ ПРОСПОНСИРОВАН ОЛЕГОМ ЕРМОЛАЕВЫМ", "oleg.jpg", )
+				dg.ChannelMessageSend(commands.General_Chat_ID, anecdote+"\n ДАННЫЙ АНЕКДОТ ПРОСПОНСИРОВАН ОЛЕГОМ ЕРМОЛАЕВЫМ")
+			}
+		}()
 	}
 
 	// Wait here until CTRL-C or other term signal is received.
