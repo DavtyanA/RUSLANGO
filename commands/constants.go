@@ -4,6 +4,7 @@ const (
 	General_Chat_ID       = "613857257460859029"
 	Botchat_ID            = "617171312481140756"
 	Pictures_Folder_Other = "other/"
+	Bot_Greeting          = "Я ТУТ ГАЙЗ"
 	Madina_Text           = `Мадина Мадина хинцам хьо зина,
 	Сунам хьо гeнa яьлла чога хьо кур яьлла.
 	Мадина Мадина ахьам со вина
@@ -51,19 +52,19 @@ const (
 
 //IDs
 const (
-	Enderlord_ID	= "329339194029899776"
-	Giogis_ID 		= "333343403163123712"
-	Mozart_ID 		= "395293715742064641"
-	AYS_ID	 		= "328835966783717386"
-	Makich_ID 		= "395319132863856650"
-	Mk7k_ID 		= "310408199658405901"
-	Vnatureloh_ID 	= "431920924946858004"
-	David_ID 		= "413729427227410442"
-	Zeeklik_ID 		= "378566714310262785" //or xawawin ya xz
-	Squirtana_ID 	= "516013742560116741"
-	Neaus_ID 		= "359012016876421131"
-	Ruslan_ID 		= "333341352404320267"
-	Ducks_Fuhrer_ID	= "395304841812901888"
+	Enderlord_ID    = "329339194029899776"
+	Giogis_ID       = "333343403163123712"
+	Mozart_ID       = "395293715742064641"
+	AYS_ID          = "328835966783717386"
+	Makich_ID       = "395319132863856650"
+	Mk7k_ID         = "310408199658405901"
+	Vnatureloh_ID   = "431920924946858004"
+	David_ID        = "413729427227410442"
+	Zeeklik_ID      = "378566714310262785" //or xawawin ya xz
+	Squirtana_ID    = "516013742560116741"
+	Neaus_ID        = "359012016876421131"
+	Ruslan_ID       = "333341352404320267"
+	Ducks_Fuhrer_ID = "395304841812901888"
 	//need to get women IDs, and Kozlov/Ruslan
 	// Zeeklik_ID 		= "378566714310262785"
 	// Zeeklik_ID 		= "378566714310262785"
