@@ -49,10 +49,11 @@ func Delete(s *discordgo.Session, channel string, messageobj *discordgo.MessageC
 				s.ChannelMessageSend(channel, Delete_Success)
 				//because printing takes a long time, put it after everything's deleted
 				//I should look into threading or async processes for this
-				for i, m := range msgs[1:] {
+				for i := len(msgs) - 1; i >= 1; i-- {
+					m := msgs[i]
 					sb := strings.Builder{}
 					sb.WriteString(fmt.Sprint("\nauthor: ", m.Author.Username, "\n"))
-					sb.WriteString(fmt.Sprint("message ", i, ": ", m.Content))
+					sb.WriteString(fmt.Sprint("message ", i + 1, ": ", m.Content))
 					if len(m.Attachments) > 0{
 						sb.WriteString(m.Attachments[0].Filename)
 					}  
