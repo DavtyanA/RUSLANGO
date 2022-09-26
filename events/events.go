@@ -231,7 +231,7 @@ func OnMessage(s *discordgo.Session, m *discordgo.MessageCreate) {
 		s.ChannelMessageSend(channel, "Я Дарцаев Исмаил Умарпашаевич 11 микрорайон космонавтов 54 приезжайте я чеченец таких пидорасов я буду разъебывать, и вас я буду разъебывать")
 		commands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"ismail.jpg")
 	case commands.StringContains(m.Content, "сука"), commands.StringContains(m.Content, "cerf"):
-		if m.Author.ID == "333341352404320267" {
+		if m.Author.ID == commands.Ruslan_ID {
 			s.ChannelMessageSend(channel, "Ну тут сыглы")
 		} else {
 			s.ChannelMessageSend(channel, "Сам сука")
