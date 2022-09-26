@@ -51,11 +51,11 @@ func Delete(s *discordgo.Session, channel string, messageobj *discordgo.MessageC
 				//I should look into threading or async processes for this
 				for i, m := range msgs {
 					sb := strings.Builder{}
+					sb.WriteString(fmt.Sprint("\nauthor: ", author, "\n"))
 					sb.WriteString(fmt.Sprint("message ", i + 1, ": ", m.Content))
 					if len(m.Attachments) > 0{
 						sb.WriteString(m.Attachments[0].Filename)
 					}  
-					sb.WriteString(fmt.Sprint("\nauthor: ", author, "\n"))
 					fmt.Println(sb.String())
 				}
 				return
