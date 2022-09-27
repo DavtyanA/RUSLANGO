@@ -96,5 +96,7 @@ var Discord_names = map[string]string{
 	Ducks_Fuhrer_ID:      "Вадим",
 	Ruslan_ID:            "Руслан",
 	Japi_ID:              "Агапи",
+	Seagull_ID:           "Сигал",
+	Tanya_ID:             "Таня",
 	// Giogis_ID:            "Олег",
 }
