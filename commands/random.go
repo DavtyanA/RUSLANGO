@@ -15,39 +15,19 @@ import (
 // Suggest a game to play
 func WhatToPlay(authorID string) string {
 	var responses []string
-	name := "сука"
-	//maybe make IDS enums, but not sure how to handle multiple IDs bois (Руслан и Козлов идите нахуй)
+	name := Discord_names[authorID]
+	if name == "" {
+		name = "сука"
+	}
+	//special cases
 	switch authorID {
 	case Enderlord_ID:
 		return "Хеллоу ебать ты кто"
-	case Giogis_ID:
-		name = "Олег"
-	case Mozart_ID:
-		name = "Даня"
-	case "434375071591563264", "911692496227139675", "796899505181032509", "395544758832988160", "313007272127102986":
-		name = "Никита"
-	case AYS_ID:
-		name = "Айс"
 	case Makich_ID:
 		return "DOTA 2"
-	case Mk7k_ID:
-		name = "Михей"
-	case Vnatureloh_ID:
-		name = "Сандро"
-	case David_ID:
-		name = "Давид"
-	case Zeeklik_ID:
-		name = "Эрик"
-	case Squirtana_ID:
-		name = "Дима"
-	case Neaus_ID:
-		name = "Карпов"
-	case Ducks_Fuhrer_ID:
-		name = "Вадим"
 	case Ruslan_ID:
-		name = "Руслан"
 		responses = append(responses, "Ты чё, долбоёб, сам с собой разговариваешь?")
-	case "403451995601764352", "395256828075704322", "554784820924907570":
+	case Japi_ID, Seagull_ID, Tanya_ID:
 		responses = append(responses, `Пиздец ну давай я еще для девушек буду ответочки писать, в оригинале же 
 													чтоб удобно было ответочка оканчивается на "заебал"`)
 	}
@@ -67,7 +47,7 @@ func StoryTelling() string {
 			"охотится парень моей бывшей Он в общем торгует " +
 			"людьми и оружием Я хуй знает, че мне с ним делать, он мне угрожает и " +
 			"пытается через левых людей инфу на меня найти. Че думаешь мне делать?",
-// \\uD83D\\uDE02\\uD83D\\uDE02\\uD83D\\uDE02 \\uD83D\\uDE06  do something later maybe idk.....
+		// \\uD83D\\uDE02\\uD83D\\uDE02\\uD83D\\uDE02 \\uD83D\\uDE06  do something later maybe idk.....
 		"У меня брат уволился, сейчас работает на бирже Нью-Йорк Тайм Сквер, " +
 			"знаешь такую? Ну это короче самая крутая биржа. Он взял меня к себе, я у него там " +
 			"типо сись админ. бля, тупой т9, я хотел сказать сисадмин. Ну вот для меня это типо " +
@@ -92,29 +72,30 @@ func StoryTelling() string {
 // Get a random joke
 func GetRandomAnecdote() string {
 	api_url := "http://anecdotica.ru/api"
-	skey := os.Getenv("ANEK_SECRET_KEY") //"e741bcd7a1b58396d2dcf115088a72c3c8d4b32940204b5db61b7b10ee1f4f8c"
+	skey := os.Getenv("ANEK_SECRET_KEY")
 	method := "getRandItem" //need 100 rublikov
 
 	q := url.Values{}
-	q.Set("pid", os.Getenv("ANEK_PID"))//"k2rp6o52g1wd17ly432o")
+	q.Set("pid", os.Getenv("ANEK_PID"))
 	q.Set("method", method)
 	q.Set("uts", fmt.Sprint(time.Now().Unix()))
-	// q.Set("category", "json")
 	q.Set("genre", "1")
 	q.Set("lang", "1")
 	q.Set("format", "txt")
 	q.Set("charset", "utf-8")
 	q.Set("markup", "1")
+	q.Set("hash", GetMD5Hash(q.Encode()+skey))
+	// these ones will be added when we reach 100 rubliks
+	// q.Set("category", "json")
 	// q.Set("note", "0")
 	// q.Set("wlist", "0")
 	// q.Set("censor", "0")
-	q.Set("hash", GetMD5Hash(q.Encode()+skey))
 
 	final_url := api_url + "?" + q.Encode()
 	resp, err := http.Get(final_url)
 	if err != nil {
 		fmt.Println("error getting anek", err)
-		return ""
+		return "Не удалось получить анек. Сервис поломался("
 	} else {
 		body, err := io.ReadAll(resp.Body)
 		if err != nil {

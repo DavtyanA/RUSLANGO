@@ -86,3 +86,8 @@ func CheckTimeForAnecdote() bool {
 	}
 	return false
 }
+
+// For easier checking
+func IsEnderlord(id string) bool {
+	return id == Enderlord_ID
+}
