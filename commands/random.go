@@ -6,6 +6,7 @@ import (
 	"math/rand"
 	"net/http"
 	"net/url"
+	"os"
 	"strconv"
 	"strings"
 	"time"
@@ -91,11 +92,11 @@ func StoryTelling() string {
 // Get a random joke
 func GetRandomAnecdote() string {
 	api_url := "http://anecdotica.ru/api"
-	skey := "e741bcd7a1b58396d2dcf115088a72c3c8d4b32940204b5db61b7b10ee1f4f8c"
+	skey := os.Getenv("ANEK_SECRET_KEY") //"e741bcd7a1b58396d2dcf115088a72c3c8d4b32940204b5db61b7b10ee1f4f8c"
 	method := "getRandItem" //need 100 rublikov
 
 	q := url.Values{}
-	q.Set("pid", "k2rp6o52g1wd17ly432o")
+	q.Set("pid", os.Getenv("ANEK_PID"))//"k2rp6o52g1wd17ly432o")
 	q.Set("method", method)
 	q.Set("uts", fmt.Sprint(time.Now().Unix()))
 	// q.Set("category", "json")
@@ -140,6 +141,8 @@ func RollInput(msg string) string {
 }
 
 // roll a random number between 0 and input
+// returns a string because the other function wants a string returned.
+// It's a question of making the code more compact and readable or more correct
 func Roll(input int) string {
 	min := 0
 	max := input + 1
