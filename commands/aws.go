@@ -27,6 +27,8 @@ func init() {
 	)
 
 }
+
+//Note that the item name is converted to lowercase in here
 func downloadFromS3Bucket(item string) (string, error) {
 	//downloader for s3 items
 	downloader := s3manager.NewDownloader(sess)

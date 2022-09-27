@@ -2,7 +2,6 @@ package events
 
 import (
 	"RUSLANGO/commands"
-	"strconv"
 	"strings"
 	"time"
 
@@ -198,7 +197,7 @@ func OnMessage(s *discordgo.Session, m *discordgo.MessageCreate) {
 		commands.SendRandomFileFromFolder(s, channel, "loss")
 	case commands.StringContainsArray(m.Content, []string{"amogus", "амогус", "амонг", "amog", "а мог", "сус", "sus", "among us"}):
 		commands.SendRandomFileFromFolder(s, channel, "amogus")
-	case commands.StringStartsWith(m.Content, "споки"), commands.StringStartsWith(m.Content, "спокойной ночи"), commands.StringStartsWith(m.Content, "сладких снов"):
+	case commands.StringStartsWithArray(m.Content, []string{"споки", "спокойной ночи", "сладких снов"}):
 		commands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"isleep.gif")
 	case commands.StringContains(m.Content, "козлов"), commands.StringContains(m.Content, "кызлар"):
 		commands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"kozlov1.jpg")
@@ -209,25 +208,14 @@ func OnMessage(s *discordgo.Session, m *discordgo.MessageCreate) {
 	case commands.StringContainsArray(m.Content, []string{"пошел нахер", "пошёл нахер", "пошёл ты нахер козёл", "пошёл ты нахер козел", "пошел ты нахер козёл", "пошел ты нахер козел"}):
 		s.ChannelMessageSend(channel, "https://youtu.be/qks8SgT1B4M")
 	case commands.StringStartsWithArray(m.Content, []string{"roll", "ролляй", "роляй", "ролл"}):
-		message := strings.Split(m.Content, " ")
-		var response string
-		if len(message) > 1 {
-			num, err := strconv.Atoi(message[1])
-			if err != nil {
-				response = "ептвою мать пиши нормально `ролл 5`, `ролляй 100`, `roll 228` нахуй мне твои буквы"
-			} else {
-				response = commands.Roll(num)
-			}
-		} else {
-			response = commands.Roll(100)
-		}
+		response := commands.RollInput(m.Content)
 		s.ChannelMessageSend(channel, response)
-	case commands.StringContains(m.Content, "посмотрим"), commands.StringContains(m.Content, "will see"), commands.StringContains(m.Content, "will see"):
+	case commands.StringContainsArray(m.Content, []string{"посмотрим", "we'll see", "will see"}):
 		commands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"WillSee.jpg")
 	case commands.StringContainsArray(m.Content, []string{"кастом", "ресел", "кемп", "дроп", "км", "сток", "сникеры", "хайпбист", "оффер", "сайз", "кондей", "ритейл", "легит чек",
 		"броук", "лейм", "шакал", "кук группа", "лоуболлер"}):
 		commands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"custom.jpg")
-	case commands.StringContains(m.Content, "ты кто"), commands.StringContains(m.Content, "кто это"), commands.StringContains(m.Content, "это кто"):
+	case commands.StringContainsArray(m.Content, []string{"ты кто", "кто это", "это кто"}):
 		s.ChannelMessageSend(channel, "Я Дарцаев Исмаил Умарпашаевич 11 микрорайон космонавтов 54 приезжайте я чеченец таких пидорасов я буду разъебывать, и вас я буду разъебывать")
 		commands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"ismail.jpg")
 	case commands.StringContains(m.Content, "сука"), commands.StringContains(m.Content, "cerf"):
@@ -236,10 +224,7 @@ func OnMessage(s *discordgo.Session, m *discordgo.MessageCreate) {
 		} else {
 			s.ChannelMessageSend(channel, "Сам сука")
 		}
-	case commands.StringContains(m.Content, "что делать"),
-		commands.StringContains(m.Content, "че делать"),
-		commands.StringContains(m.Content, "че сделать"),
-		commands.StringContains(m.Content, "что сделать"):
+	case commands.StringContainsArray(m.Content, []string{"что делать", "че делать", "че сделать", "что сделать"}):
 		commands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"choosepudge.jpg")
 	case commands.StringContains(m.Content, "мем"), commands.StringContains(m.Content, "meme"):
 		commands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"meme.jpg")
@@ -247,8 +232,6 @@ func OnMessage(s *discordgo.Session, m *discordgo.MessageCreate) {
 		commands.Delete(s, channel, m)
 	case commands.StringContains(m.Content, "вадим"), m.Author.ID == commands.Ducks_Fuhrer_ID:
 		s.ChannelMessageSend(channel, "А вы в курсе что Вадим натурал?")
-		// discordgo.MessageEmbed
-		// s.ChannelMessageSendEmbed()
 	}
 }
 

@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"net/url"
 	"strconv"
+	"strings"
 	"time"
 )
 
@@ -120,6 +121,21 @@ func GetRandomAnecdote() string {
 		} else {
 			return string(body)
 		}
+	}
+}
+
+//Check the input before calling the actual roll function
+func RollInput(msg string) string {
+	message := strings.Split(msg, " ")
+	if len(message) > 1 {
+		num, err := strconv.Atoi(message[1])
+		if err != nil {
+			return "ептвою мать пиши нормально `ролл 5`, `ролляй 100`, `roll 228` нахуй мне твои буквы"
+		} else {
+			return Roll(num)
+		}
+	} else {
+		return Roll(100)
 	}
 }
 
