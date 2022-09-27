@@ -50,53 +50,54 @@ const (
 	Delete_FuckYou = "Мусор уже вынесли, пиздуй давай"
 )
 
-//IDs
+// IDs
 const (
-	Enderlord_ID    = "329339194029899776"
-	Giogis_ID       = "333343403163123712"
-	Mozart_ID       = "395293715742064641"
-	AYS_ID          = "328835966783717386"
-	Makich_ID       = "395319132863856650"
-	Mk7k_ID         = "310408199658405901"
-	Vnatureloh_ID   = "431920924946858004"
-	David_ID        = "413729427227410442"
-	Zeeklik_ID      = "378566714310262785" //or xawawin ya xz
-	Squirtana_ID    = "516013742560116741"
-	Neaus_ID        = "359012016876421131"
-	Ruslan_ID       = "333341352404320267"
-	Ducks_Fuhrer_ID = "395304841812901888"
-	Japi_ID         = "403451995601764352"
-	Seagull_ID      = "395256828075704322"
-	Tanya_ID        = "554784820924907570"
-	//need to get women IDs, and Kozlov/Ruslan
-	// Zeeklik_ID 		= "378566714310262785"
-	// Zeeklik_ID 		= "378566714310262785"
-	// Zeeklik_ID 		= "378566714310262785"
-	// Zeeklik_ID 		= "378566714310262785"
+	Enderlord_ID      = "329339194029899776"
+	Giogis_ID         = "333343403163123712"
+	Mozart_ID         = "395293715742064641"
+	AYS_ID            = "328835966783717386"
+	Makich_ID         = "395319132863856650"
+	Mk7k_ID           = "310408199658405901"
+	Vnatureloh_ID     = "431920924946858004"
+	David_ID          = "413729427227410442"
+	Zeeklik_ID        = "378566714310262785" //or xawawin ya xz
+	Squirtana_ID      = "516013742560116741"
+	Neaus_ID          = "359012016876421131"
+	Ruslan_ID         = "388390646945284097"
+	Jude_ID           = "333341352404320267" //normal ruslan
+	Ducks_Fuhrer_ID   = "395304841812901888"
+	Japi_ID           = "403451995601764352"
+	Seagull_ID        = "395256828075704322"
+	Tanya_ID          = "554784820924907570"
+	KateMoss_ID       = "434375071591563264"
+	Soldat_ID         = "911692496227139675"
+	Ya_ti_chmo_ID     = "796899505181032509"
+	Mudak_i_gandon_ID = "395544758832988160"
+	TriGunD_ID        = "313007272127102986"
 )
 
-//Names corresponding to IDs
+// Names corresponding to IDs
 var Discord_names = map[string]string{
 
-	Giogis_ID:            "Олег",
-	Mozart_ID:            "Даня",
-	"434375071591563264": "Никита",
-	"911692496227139675": "Никита",
-	"796899505181032509": "Никита",
-	"395544758832988160": "Никита",
-	"313007272127102986": "Никита",
-	AYS_ID:               "Айс",
-	Makich_ID:            "Вова",
-	Mk7k_ID:              "Михей",
-	Vnatureloh_ID:        "Сандро",
-	David_ID:             "Давид",
-	Zeeklik_ID:           "Эрик",
-	Squirtana_ID:         "Дима",
-	Neaus_ID:             "Карпов",
-	Ducks_Fuhrer_ID:      "Вадим",
-	Ruslan_ID:            "Руслан",
-	Japi_ID:              "Агапи",
-	Seagull_ID:           "Сигал",
-	Tanya_ID:             "Таня",
+	Giogis_ID:         "Олег",
+	Mozart_ID:         "Даня",
+	KateMoss_ID:       "Никита",
+	Soldat_ID:         "Никита",
+	Ya_ti_chmo_ID:     "Никита",
+	Mudak_i_gandon_ID: "Никита",
+	TriGunD_ID:        "Никита",
+	AYS_ID:            "Айс",
+	Makich_ID:         "Вова",
+	Mk7k_ID:           "Михей",
+	Vnatureloh_ID:     "Сандро",
+	David_ID:          "Давид",
+	Zeeklik_ID:        "Эрик",
+	Squirtana_ID:      "Дима",
+	Neaus_ID:          "Карпов",
+	Ducks_Fuhrer_ID:   "Вадим",
+	Ruslan_ID:         "Руслан",
+	Japi_ID:           "Агапи",
+	Seagull_ID:        "Сигал",
+	Tanya_ID:          "Таня",
 	// Giogis_ID:            "Олег",
 }

@@ -47,6 +47,8 @@ func Delete(s *discordgo.Session, channel string, messageobj *discordgo.MessageC
 			fmt.Println(fmt.Sprint(author, " Has deleted ", strconv.Itoa(len(ids)-1), " messages:"))
 			s.ChannelMessagesBulkDelete(channel, ids)
 			s.ChannelMessageSend(channel, Delete_Success)
+
+			//Deleted messages logging
 			//because printing takes a long time, put it after everything's deleted
 			//I should look into threading or async processes for this
 			count := 1
