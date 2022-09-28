@@ -39,21 +39,35 @@ func main() {
 		return
 	}
 
-	for range time.Tick(time.Minute) {
-		go func() {
-			if commands.CheckTimeForAnecdote() {
-				anecdote := commands.GetRandomAnecdote()
-				dg.ChannelMessageSend(commands.General_Chat_ID, anecdote+"\n ДАННЫЙ АНЕКДОТ ПРОСПОНСИРОВАН ОЛЕГОМ ЕРМОЛАЕВЫМ")
-			}
-		}()
-	}
-
 	// Wait here until CTRL-C or other term signal is received.
 	fmt.Println("Bot is now running. Press CTRL-C like 1000 times in a row to exit.")
 	sc := make(chan os.Signal, 1)
 	signal.Notify(sc, syscall.SIGINT, syscall.SIGTERM, os.Interrupt)
-	<-sc
+
+	Ticker := time.NewTicker(time.Minute)
+	anekTimer(sc, dg)
+	Ticker.Stop()
 
 	// Cleanly close down the Discord session.
 	dg.Close()
+}
+
+// In order for program to be killed with the signal input, we need this function
+func anekTimer(done <-chan os.Signal, dg *discordgo.Session) {
+
+	ticker := time.NewTicker(time.Second)
+	defer ticker.Stop()
+
+	for {
+		select {
+		case <-done:
+			return
+		case tm := <-ticker.C:
+			fmt.Println("The Current time is: ", tm)
+			if commands.CheckTimeForAnecdote() {
+				anecdote := commands.GetRandomAnecdote()
+				dg.ChannelMessageSend(commands.General_Chat_ID, anecdote+"\n ДАННЫЙ АНЕКДОТ ПРОСПОНСИРОВАН ОЛЕГОМ ЕРМОЛАЕВЫМ")
+			}
+		}
+	}
 }
