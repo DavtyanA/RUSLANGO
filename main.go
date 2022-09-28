@@ -60,8 +60,7 @@ func anekTimer(done <-chan os.Signal, dg *discordgo.Session) {
 		select {
 		case <-done:
 			return
-		case tm := <-ticker.C:
-			fmt.Println("The Current time is: ", tm)
+		case <-ticker.C:
 			if commands.CheckTimeForAnecdote() {
 				anecdote := commands.GetRandomAnecdote()
 				dg.ChannelMessageSend(commands.General_Chat_ID, anecdote+"\n ДАННЫЙ АНЕКДОТ ПРОСПОНСИРОВАН ОЛЕГОМ ЕРМОЛАЕВЫМ")
