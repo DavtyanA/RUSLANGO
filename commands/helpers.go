@@ -81,7 +81,7 @@ func GetMD5Hash(text string) string {
 // Check for times to post anecdotes
 func CheckTimeForAnecdote() bool {
 	switch time.Now().Format(time.Kitchen) {
-	case "11:28PM", "10:59PM":
+	case "11:28PM", "3:00AM":
 		return true
 	}
 	return false
