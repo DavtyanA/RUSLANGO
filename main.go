@@ -44,9 +44,7 @@ func main() {
 	sc := make(chan os.Signal, 1)
 	signal.Notify(sc, syscall.SIGINT, syscall.SIGTERM, os.Interrupt)
 
-	Ticker := time.NewTicker(time.Minute)
 	anekTimer(sc, dg)
-	Ticker.Stop()
 
 	// Cleanly close down the Discord session.
 	dg.Close()
@@ -55,7 +53,7 @@ func main() {
 // In order for program to be killed with the signal input, we need this function
 func anekTimer(done <-chan os.Signal, dg *discordgo.Session) {
 
-	ticker := time.NewTicker(time.Second)
+	ticker := time.NewTicker(time.Minute)
 	defer ticker.Stop()
 
 	for {
