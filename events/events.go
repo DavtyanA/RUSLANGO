@@ -2,6 +2,7 @@ package events
 
 import (
 	"RUSLANGO/commands"
+	"fmt"
 	"strings"
 	"time"
 
@@ -9,6 +10,7 @@ import (
 )
 
 func OnServerJoin(s *discordgo.Session, e *discordgo.GuildMemberAdd) {
+	fmt.Println("Server join")
 	var responses []string
 	user := e.User
 	name := user.Mention()
@@ -38,6 +40,7 @@ func OnServerJoin(s *discordgo.Session, e *discordgo.GuildMemberAdd) {
 			"ТЕСТИРУЕМ ПРИВЕТСТВИЯ! ПРИВЕТ, "+name+", НАПИШИ В ЧАТ 'ОЛЕГ ЕРМОЛАЕВ' ДЛЯ ДОСТУПА К СЕКРЕТНОМУ КАНАЛУ")
 	}
 	greeting := commands.GetRandomItem(responses)
+	fmt.Println(greeting)
 	s.ChannelMessageSend(commands.General_Chat_ID, greeting)
 }
 
@@ -62,7 +65,6 @@ func OnServerLeave(s *discordgo.Session, e *discordgo.GuildMemberRemove) {
 // This function will be called (due to AddHandler above) every time a new
 // message is created on any channel that the authenticated bot has access to.
 func OnMessage(s *discordgo.Session, m *discordgo.MessageCreate) {
-
 	author := m.Author.ID
 	message := m.Content
 	// Ignore all messages created by the bot itself
@@ -214,7 +216,7 @@ func OnMessage(s *discordgo.Session, m *discordgo.MessageCreate) {
 	case "anek", "anec", "anecode", "анек", "анекдот", "юмор", "юмореска", "поржать", "ржать", "нуждик", "fytr", "фтус", "фтул":
 		anecdote := commands.GetRandomAnecdote()
 		s.ChannelMessageSend(channel, anecdote+"\n ДАННЫЙ АНЕКДОТ ПРОСПОНСИРОВАН ОЛЕГОМ ЕРМОЛАЕВЫМ")
-		
+
 	case "расскажи историю":
 		if commands.Roll(5) == "5" {
 			commands.MegaStory(s, channel)
@@ -274,8 +276,8 @@ func OnMessage(s *discordgo.Session, m *discordgo.MessageCreate) {
 	}
 }
 
-//When Ruslan connects to server, greet everyone. However, for some reason,
-//heroku does it too often, so this also has logic to prevent spamming.
+// When Ruslan connects to server, greet everyone. However, for some reason,
+// heroku does it too often, so this also has logic to prevent spamming.
 func OnBotReady(s *discordgo.Session, m *discordgo.Connect) {
 	channel, _ := s.Channel(commands.Botchat_ID)
 	last_message, _ := s.ChannelMessage(channel.ID, channel.LastMessageID)
