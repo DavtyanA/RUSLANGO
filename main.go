@@ -29,6 +29,9 @@ func main() {
 	dg.AddHandler(events.OnServerLeave)
 	dg.AddHandler(events.OnBotReady)
 
+	// Make sure to include the intents in the code, because doing this in the developers portal doesn't work
+	dg.Identify.Intents = discordgo.IntentsGuildMessages | discordgo.IntentsGuildMembers
+
 	// Open a websocket connection to Discord and begin listening.
 	err = dg.Open()
 	if err != nil {
