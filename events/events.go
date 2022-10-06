@@ -2,7 +2,6 @@ package events
 
 import (
 	"RUSLANGO/commands"
-	"fmt"
 	"strings"
 	"time"
 
@@ -10,7 +9,6 @@ import (
 )
 
 func OnServerJoin(s *discordgo.Session, e *discordgo.GuildMemberAdd) {
-	fmt.Println("Server join")
 	var responses []string
 	user := e.User
 	name := user.Mention()
@@ -40,7 +38,6 @@ func OnServerJoin(s *discordgo.Session, e *discordgo.GuildMemberAdd) {
 			"ТЕСТИРУЕМ ПРИВЕТСТВИЯ! ПРИВЕТ, "+name+", НАПИШИ В ЧАТ 'ОЛЕГ ЕРМОЛАЕВ' ДЛЯ ДОСТУПА К СЕКРЕТНОМУ КАНАЛУ")
 	}
 	greeting := commands.GetRandomItem(responses)
-	fmt.Println(greeting)
 	s.ChannelMessageSend(commands.General_Chat_ID, greeting)
 }
 
