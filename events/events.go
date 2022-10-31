@@ -212,7 +212,11 @@ func OnMessage(s *discordgo.Session, m *discordgo.MessageCreate) {
 
 	case "anek", "anec", "anecode", "анек", "анекдот", "юмор", "юмореска", "поржать", "ржать", "нуждик", "fytr", "фтус", "фтул":
 		anecdote := commands.GetRandomAnecdote()
-		s.ChannelMessageSend(channel, anecdote+"\n ДАННЫЙ АНЕКДОТ ПРОСПОНСИРОВАН ОЛЕГОМ ЕРМОЛАЕВЫМ")
+		if anecdote == "32" {
+			s.ChannelMessageSend(channel, "За анеки не уплочено... Дайте ендерлолу 25 рубчиков или попросите Айса сделать бота в дискорде (дать 25 рубчиков намного легче)")
+		} else {
+			s.ChannelMessageSend(channel, anecdote+"\n ДАННЫЙ АНЕКДОТ ПРОСПОНСИРОВАН ОЛЕГОМ ЕРМОЛАЕВЫМ")
+		}
 
 	case "расскажи историю":
 		if commands.Roll(5) == "5" {

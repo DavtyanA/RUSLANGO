@@ -63,7 +63,9 @@ func anekTimer(done <-chan os.Signal, dg *discordgo.Session) {
 		case <-ticker.C:
 			if commands.CheckTimeForAnecdote() {
 				anecdote := commands.GetRandomAnecdote()
-				dg.ChannelMessageSend(commands.General_Chat_ID, anecdote+"\n ДАННЫЙ АНЕКДОТ ПРОСПОНСИРОВАН ОЛЕГОМ ЕРМОЛАЕВЫМ")
+				if anecdote != "32" {
+					dg.ChannelMessageSend(commands.General_Chat_ID, anecdote+"\n ДАННЫЙ АНЕКДОТ ПРОСПОНСИРОВАН ОЛЕГОМ ЕРМОЛАЕВЫМ")
+				}
 			}
 		}
 	}
