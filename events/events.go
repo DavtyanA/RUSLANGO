@@ -78,6 +78,8 @@ func OnMessage(s *discordgo.Session, m *discordgo.MessageCreate) {
 	case "руслан":
 		commands.SendFileFromS3(s, channel, commands.Pictures_Folder_Other+"ismail.jpg")
 		s.ChannelMessageSend(channel, "Я НОВЫЙ УСОВЕРШЕНСТВОВАННЫЙ РУСЛАН, RUSLAN GO!")
+	case "приглос", "приглашение":
+		s.ChannelMessageSend(channel, commands.Server_Invite)
 
 	case "пошел нахуй", "пошёл нахуй", "иди нахуй", "пошол нахуй", "пишов нахуй", "пашел нахуй", "пашол нахуй", "иди газуй", "пошёл газуй":
 		responses = append(responses, "Дорогу покажешь?",

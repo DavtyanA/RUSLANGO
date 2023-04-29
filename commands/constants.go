@@ -48,6 +48,7 @@ const (
 	Delete_Usage   = "Я не знаю хотел ты удалить сообщения или нет, но если хотел, нужно написать сколько. Например 'Удали 5'"
 	Delete_Success = "Мусор вынесен!"
 	Delete_FuckYou = "Мусор уже вынесли, пиздуй давай"
+	Server_Invite  = "https://discord.gg/UvEZHak"
 )
 
 // IDs
