@@ -2,11 +2,8 @@ package events
 
 import (
 	"RUSLANGO/commands"
-	"fmt"
 	"strings"
 	"time"
-
-	//"fmt"
 
 	"github.com/bwmarrin/discordgo"
 )
@@ -287,7 +284,6 @@ func OnMessage(s *discordgo.Session, m *discordgo.MessageCreate) {
 func OnBotReady(s *discordgo.Session, m *discordgo.Connect) {
 	channel, _ := s.Channel(commands.Botchat_ID)
 	last_message, _ := s.ChannelMessage(channel.ID, channel.LastMessageID)
-	fmt.Println(last_message)
 	if last_message.Content != commands.Bot_Greeting {
 		s.ChannelMessageSend(commands.Botchat_ID, commands.Bot_Greeting)
 	}
