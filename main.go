@@ -14,7 +14,7 @@ import (
 
 func main() {
 
-	token := os.Getenv("TOKEN")
+	token := os.Getenv("RUSLAN_BOT_DISCORD_TOKEN")
 
 	// Create a new Discord session using the provided bot token.
 	dg, err := discordgo.New("Bot " + token)
@@ -70,3 +70,4 @@ func anekTimer(done <-chan os.Signal, dg *discordgo.Session) {
 		}
 	}
 }
+
